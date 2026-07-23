@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const isAiEnabled = process.env.AI_ENABLED === 'true';
-    const apiKey = process.env.ANTHROPIC_API_KEY;
+    const apiKey = process.env.DEEPSEEK_API_KEY;
 
     const { articleNum, articleTitre, contenuActuel, questionsEtReponses } = await request.json();
 
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       });
     }
 
-    // Build the prompt for Claude 3.5 Sonnet
+    // Build the prompt for DeepSeek
     const prompt = `Vous êtes un juriste expert du droit des associations en Côte d'Ivoire (loi n° 60-315 du 21 septembre 1960).
 Vous assistez l'association AMAC ("Les Amis de la Musique Afro-Cubaine") dans la réformation de ses textes fondateurs lors de son séminaire national.
 
@@ -45,16 +45,16 @@ Retournez EXCLUSIVEMENT un objet JSON valide avec les clés suivantes, sans aucu
   "exposeMotifs": "Explication claire et synthétique des motifs juridiques et opérationnels du changement..."
 }`;
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://api.deepseek.com/chat/completions', {
       method: 'POST',
       headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
+        Authorization: `Bearer ${apiKey}`,
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-3-5-sonnet-20241022',
+        model: 'deepseek-chat',
         max_tokens: 1024,
+        response_format: { type: 'json_object' },
         messages: [
           {
             role: 'user',
@@ -66,13 +66,13 @@ Retournez EXCLUSIVEMENT un objet JSON valide avec les clés suivantes, sans aucu
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error('Anthropic API error:', errText);
-      throw new Error(`API Anthropic error: ${response.status}`);
+      console.error('DeepSeek API error:', errText);
+      throw new Error(`API DeepSeek error: ${response.status}`);
     }
 
     const resJson = await response.json();
-    const replyText = resJson.content[0].text;
-    
+    const replyText = resJson.choices[0].message.content;
+
     // Parse the JSON response from the model
     // Remove markdown code fences if present
     const cleanJsonText = replyText.replace(/```json/g, '').replace(/```/g, '').trim();

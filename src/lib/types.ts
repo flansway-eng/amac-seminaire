@@ -1,4 +1,4 @@
-export type UserRole = 'membre' | 'responsable_section' | 'ben' | 'comite_controle' | 'cac' | 'admin';
+export type UserRole = 'membre' | 'delegue' | 'responsable_section' | 'ben' | 'comite_controle' | 'cac' | 'scribe' | 'admin';
 export type TexteCode = 'STATUTS' | 'RI';
 export type EnjeuType = 'contradiction' | 'renvoi_errone' | 'lacune' | 'risque_gouvernance' | 'incoherence_numerotation' | 'modernisation';
 export type EnjeuGravite = 'critique' | 'majeur' | 'mineur';
@@ -12,6 +12,7 @@ export interface Section {
   ville: string;
   responsable: string | null;
   actif: boolean;
+  a_jour_cotisation: boolean;
 }
 
 export interface Profile {

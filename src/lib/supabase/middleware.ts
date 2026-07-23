@@ -1,6 +1,13 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
+// Chemins accessibles sans session Supabase valide.
+const PUBLIC_PATHS = ['/login', '/api/auth'];
+
+function isPublicPath(pathname: string) {
+  return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
+}
+
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
@@ -27,54 +34,38 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // Get current user session
+  const { pathname } = request.nextUrl;
+
+  // Une erreur d'authentification ne doit jamais laisser passer la requête :
+  // en production, on referme l'accès ; en développement, on journalise et on
+  // traite la session comme absente (pas de contournement silencieux).
   let user = null;
   try {
-    const { data } = await supabase.auth.getUser();
-    user = data?.user;
+    const { data, error } = await supabase.auth.getUser();
+    if (error) throw error;
+    user = data.user;
   } catch (err) {
-    console.warn('Failed to fetch user in middleware, using offline path:', err);
-  }
-
-  const isAuthCallback = request.nextUrl.pathname.startsWith('/api/auth');
-
-  if (!user && !isAuthCallback) {
-    try {
-      // Attempt background login as guest
-      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-        email: 'guest@amac.ci',
-        password: 'password123',
-      });
-
-      if (signInError) {
-        // If guest user doesn't exist yet, sign up the guest user
-        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-          email: 'guest@amac.ci',
-          password: 'password123',
-          options: {
-            data: {
-              nom: 'Koffi Délégué',
-              role: 'admin',
-              section_id: 1,
-            },
-          },
-        });
-
-        if (!signUpError && signUpData.user) {
-          user = signUpData.user;
-        }
-      } else if (signInData.user) {
-        user = signInData.user;
-      }
-    } catch (err) {
-      console.warn('Auto login failed:', err);
+    if (process.env.NODE_ENV === 'production') {
+      const url = request.nextUrl.clone();
+      url.pathname = '/login';
+      url.searchParams.set('erreur', 'session');
+      return NextResponse.redirect(url);
     }
+    console.warn('[middleware] session Supabase indisponible en développement :', err);
   }
 
-  const isLoginPage = request.nextUrl.pathname.startsWith('/login');
+  // Accès par défaut fermé : toute route hors PUBLIC_PATHS exige une session,
+  // quel que soit l'environnement (aucune dérogation "mode hors-ligne" ici —
+  // le mode hors-ligne ne concerne que la consultation de contenu mis en
+  // cache côté client, jamais le contournement de l'authentification).
+  if (!user && !isPublicPath(pathname)) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/login';
+    url.searchParams.set('erreur', 'session');
+    return NextResponse.redirect(url);
+  }
 
-  if (user && isLoginPage) {
-    // Redirect to home if logged in and trying to access login page
+  if (user && pathname.startsWith('/login')) {
     const url = request.nextUrl.clone();
     url.pathname = '/';
     return NextResponse.redirect(url);

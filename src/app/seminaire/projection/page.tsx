@@ -182,7 +182,12 @@ export default function ProjectionPage() {
 
       {/* Options columns A/B */}
       {question ? (
-        <div className="grid grid-cols-2 gap-8 flex-1 items-stretch">
+        <div
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          className="grid grid-cols-2 gap-8 flex-1 items-stretch"
+        >
           {/* Option A */}
           <div className="bg-slate-900/40 border border-slate-800 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden">
             <div>
@@ -248,7 +253,11 @@ export default function ProjectionPage() {
       )}
 
       {/* Bottom stats details */}
-      <div className="mt-8 border-t border-slate-800 pt-6 flex justify-between items-center text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+      <div
+        role="status"
+        aria-live="polite"
+        className="mt-8 border-t border-slate-800 pt-6 flex justify-between items-center text-[10px] text-slate-500 font-bold uppercase tracking-wider"
+      >
         <div className="flex space-x-6">
           <span>Total Votants : <span className="text-white">{votes.total}</span></span>
           <span>Abstentions : <span className="text-white">{votes.abstention} ({pctAbs}%)</span></span>

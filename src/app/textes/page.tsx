@@ -1,6 +1,6 @@
 import { getArticles } from '@/lib/actions/articles';
 import { TexteCode } from '@/lib/types';
-import { SEVERITIES } from '@/lib/constants/labels';
+import { SEVERITIES, isContenuPlaceholder } from '@/lib/constants/labels';
 import Link from 'next/link';
 import { Search, AlertTriangle, BookOpen, Filter } from 'lucide-react';
 
@@ -158,6 +158,13 @@ export default async function TextesPage({
                 <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
                   {art.contenu_actuel}
                 </p>
+
+                {isContenuPlaceholder(art.contenu_actuel) && (
+                  <div className="mt-2 flex items-center space-x-1 text-[9px] text-amber-700 font-semibold bg-amber-50 px-2 py-1 rounded-lg border border-amber-100 w-fit">
+                    <span>⚠️</span>
+                    <span>Texte provisoire</span>
+                  </div>
+                )}
 
                 {hasEnjeux && (
                   <div className="mt-2 flex items-center space-x-1 text-[9px] text-amber-600 font-semibold bg-amber-50/50 px-2 py-1 rounded-lg border border-amber-100/50 w-fit">

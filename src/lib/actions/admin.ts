@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { Article, Proposition, Decision, PropositionStatut, DecisionVote } from '@/lib/types';
 import { consolidateArticles } from '@/lib/utils/consolidation';
+import { calculerResultatAdoption, TypeMajorite } from '@/lib/utils/majorite';
 import { revalidatePath } from 'next/cache';
 
 export interface SectionStat {
@@ -178,32 +179,42 @@ export async function adoptPropositionDirectly(
   propId: string,
   votesPour: number,
   votesContre: number,
-  abstentions: number
+  abstentions: number,
+  quorumAtteint: boolean,
+  typeMajorite: TypeMajorite = 'absolue'
 ) {
   const supabase = await createClient();
 
-  // Update proposition status to adopted
-  const { error: propErr } = await supabase
-    .from('propositions')
-    .update({ statut: 'adoptee' as PropositionStatut })
-    .eq('id', propId);
+  const decision = calculerResultatAdoption(
+    { votesPour, votesContre, abstentions },
+    quorumAtteint,
+    typeMajorite
+  );
 
-  if (propErr) {
-    return { success: false, error: propErr.message };
+  // Update proposition status according to the real outcome of the vote
+  if (decision !== 'reporte') {
+    const { error: propErr } = await supabase
+      .from('propositions')
+      .update({ statut: (decision === 'adopte' ? 'adoptee' : 'rejetee') as PropositionStatut })
+      .eq('id', propId);
+
+    if (propErr) {
+      return { success: false, error: propErr.message };
+    }
   }
 
-  // Create decision
+  // Create decision record with the real computed outcome
   const { error: decErr } = await supabase
     .from('decisions')
     .insert({
       article_id: articleId,
       proposition_id: propId,
-      decision: 'adopte' as DecisionVote,
+      decision: decision as DecisionVote,
       votes_pour: votesPour,
       votes_contre: votesContre,
       abstentions: abstentions,
       seance: 'Arbitrage BEN Direct',
-      quorum_atteint: true,
+      quorum_atteint: quorumAtteint,
     });
 
   if (decErr) {
@@ -213,7 +224,7 @@ export async function adoptPropositionDirectly(
   revalidatePath('/dashboard');
   revalidatePath('/concordance');
   revalidatePath('/textes');
-  return { success: true };
+  return { success: true, decision };
 }
 
 export async function getConsolidatedCorpus(texteCode: 'STATUTS' | 'RI') {

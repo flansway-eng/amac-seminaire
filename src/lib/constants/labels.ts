@@ -7,11 +7,13 @@ export const TEXT_CODES = {
 
 export const ROLES = {
   membre: "Membre",
+  delegue: "Délégué de section",
   responsable_section: "Responsable de Section",
   ben: "Bureau Exécutif National",
   comite_controle: "Comité de Contrôle",
   cac: "Commissaire aux Comptes",
-  admin: "Administrateur Scribe",
+  scribe: "Scribe",
+  admin: "Administrateur",
 };
 
 export const SEVERITIES = {
@@ -52,6 +54,16 @@ export const PROPOSITION_STATUS = {
   rejetee: { label: "Rejetée", color: "bg-red-100 text-red-800" },
   fusionnee: { label: "Fusionnée", color: "bg-teal-100 text-teal-800" },
 };
+
+// Repère les articles dont le contenu n'a pas encore été remplacé par le
+// texte réellement adopté le 24/12/2013 (voir seed/statuts.json et
+// seed/reglement_interieur.json : ~71 des 96 articles utilisent encore ce
+// texte de substitution en attendant la source officielle).
+export const PLACEHOLDER_MARKER = 'Contenu standard de l\'article';
+
+export function isContenuPlaceholder(contenu: string | null | undefined): boolean {
+  return !!contenu && contenu.includes(PLACEHOLDER_MARKER);
+}
 
 export const SECTIONS = {
   1: "Abidjan Lagunes",

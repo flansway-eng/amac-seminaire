@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Article } from '@/lib/types';
-import { SEVERITIES, ENJEU_TYPES } from '@/lib/constants/labels';
+import { SEVERITIES, ENJEU_TYPES, isContenuPlaceholder } from '@/lib/constants/labels';
 import { ChevronLeft, ChevronRight, AlertTriangle, Link as LinkIcon, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
@@ -149,9 +149,19 @@ export default function SwipeableCard({
       {/* Body Content */}
       <div className="p-6 flex-1 flex flex-col space-y-6 overflow-y-auto">
         <div>
-          <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">
-            Texte Actuel (2013)
-          </h4>
+          <div className="flex items-center justify-between mb-2">
+            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              Texte Actuel (2013)
+            </h4>
+            {isContenuPlaceholder(article.contenu_actuel) && (
+              <span
+                role="status"
+                className="text-[9px] px-2 py-0.5 rounded-full font-bold uppercase bg-amber-100 text-amber-800 border border-amber-200"
+              >
+                ⚠️ Texte provisoire à remplacer
+              </span>
+            )}
+          </div>
           <p className="text-sm text-slate-800 leading-relaxed font-serif whitespace-pre-wrap">
             {article.contenu_actuel}
           </p>

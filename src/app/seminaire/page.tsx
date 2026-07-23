@@ -3,6 +3,7 @@ import { getArticles, getArticleById } from '@/lib/actions/articles';
 import SeminarInterface from '@/components/seminar-interface';
 import { Radio } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { getDemoRoleOverride } from '@/lib/utils/demo-role';
 
 export default async function SeminairePage() {
   const supabase = await createClient();
@@ -24,6 +25,12 @@ export default async function SeminairePage() {
   if (!profile) {
     redirect('/login');
   }
+
+  // Simulation de rôle (démonstration/formation) : n'affecte que l'aperçu de
+  // la console scribe côté client — submitSeminarVote / adoptSeminarProposition
+  // s'appuient sur le rôle réel en base via RLS, jamais sur ce cookie.
+  const demoOverride = await getDemoRoleOverride();
+  const roleAffiche = demoOverride?.role ?? profile.role;
 
   // Fetch active seminar session state
   const { data: session } = await supabase
@@ -70,7 +77,7 @@ export default async function SeminairePage() {
       </div>
 
       <SeminarInterface
-        userRole={profile.role}
+        userRole={roleAffiche}
         userId={user.id}
         initialActiveArticle={activeArticle}
         allQuestionArticles={questionArticles}

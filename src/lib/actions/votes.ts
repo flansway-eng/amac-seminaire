@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { PropositionStatut, DecisionVote } from '@/lib/types';
 import { revalidatePath } from 'next/cache';
+import { calculerResultatAdoption, TypeMajorite } from '@/lib/utils/majorite';
 
 export async function updateActiveSeminarArticle(articleId: number) {
   const supabase = await createClient();
@@ -72,9 +73,16 @@ export async function adoptSeminarProposition(
   votesPour: number,
   votesContre: number,
   abstentions: number,
+  quorumAtteint: boolean,
+  typeMajorite: TypeMajorite = 'absolue',
   scribeText?: string
 ) {
   const supabase = await createClient();
+
+  const resultatVote = { votesPour, votesContre, abstentions };
+  const decision = calculerResultatAdoption(resultatVote, quorumAtteint, typeMajorite);
+  const nouveauStatut: PropositionStatut = decision === 'adopte' ? 'adoptee' : 'rejetee';
+  const nouvelleVersion = decision === 'adopte' ? 'V1.0' : 'V0.9';
 
   // If scribe edited the text, we must update the proposition's text before adopting
   if (scribeText && scribeText.trim() !== '') {
@@ -82,7 +90,7 @@ export async function adoptSeminarProposition(
       .from('propositions')
       .update({
         texte_propose: scribeText,
-        version: 'V1.0',
+        version: nouvelleVersion,
       })
       .eq('id', propId);
 
@@ -92,32 +100,34 @@ export async function adoptSeminarProposition(
     }
   }
 
-  // Update proposition status to adopted
-  const { error: propErr } = await supabase
-    .from('propositions')
-    .update({
-      statut: 'adoptee' as PropositionStatut,
-      version: 'V1.0',
-    })
-    .eq('id', propId);
+  // Update proposition status according to the actual vote outcome
+  if (decision !== 'reporte') {
+    const { error: propErr } = await supabase
+      .from('propositions')
+      .update({
+        statut: nouveauStatut,
+        version: nouvelleVersion,
+      })
+      .eq('id', propId);
 
-  if (propErr) {
-    console.error('Error adopting proposition:', propErr);
-    return { success: false, error: propErr.message };
+    if (propErr) {
+      console.error('Error updating proposition after vote:', propErr);
+      return { success: false, error: propErr.message };
+    }
   }
 
-  // Insert decision record
+  // Insert decision record with the real computed outcome (jamais "adopte" par défaut)
   const { error: decErr } = await supabase
     .from('decisions')
     .insert({
       article_id: articleId,
       proposition_id: propId,
-      decision: 'adopte' as DecisionVote,
+      decision: decision as DecisionVote,
       votes_pour: votesPour,
       votes_contre: votesContre,
       abstentions: abstentions,
       seance: 'Plénière du Séminaire V1.0',
-      quorum_atteint: true,
+      quorum_atteint: quorumAtteint,
     });
 
   if (decErr) {
@@ -141,5 +151,5 @@ export async function adoptSeminarProposition(
   revalidatePath('/seminaire');
   revalidatePath('/seminaire/projection');
   revalidatePath('/concordance');
-  return { success: true };
+  return { success: true, decision };
 }

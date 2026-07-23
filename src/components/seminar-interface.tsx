@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Article, Question, Reponse, Proposition } from '@/lib/types';
 import { updateActiveSeminarArticle, submitSeminarVote, adoptSeminarProposition } from '@/lib/actions/votes';
+import { TypeMajorite } from '@/lib/utils/majorite';
 import { Radio, Loader2, Check, Send, AlertTriangle, Edit, RefreshCw } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -27,7 +28,8 @@ export default function SeminarInterface({
   const [propositions, setPropositions] = useState<Proposition[]>(initialPropositions);
   const [userVote, setUserVote] = useState<'A' | 'B' | 'abstention' | null>(null);
   const [loading, setLoading] = useState(false);
-  const [isScribeMode, setIsScribeMode] = useState(userRole === 'admin' || userRole === 'ben');
+  const peutOfficier = userRole === 'admin' || userRole === 'ben' || userRole === 'scribe';
+  const [isScribeMode, setIsScribeMode] = useState(peutOfficier);
 
   // Scribe console states
   const [scribeText, setScribeText] = useState('');
@@ -35,7 +37,10 @@ export default function SeminarInterface({
   const [votesPour, setVotesPour] = useState(0);
   const [votesContre, setVotesContre] = useState(0);
   const [votesAbstention, setVotesAbstention] = useState(0);
+  const [quorumAtteint, setQuorumAtteint] = useState(true);
+  const [typeMajorite, setTypeMajorite] = useState<TypeMajorite>('absolue');
   const [savingAdoption, setSavingAdoption] = useState(false);
+  const [derniereDecision, setDerniereDecision] = useState<string | null>(null);
 
   const supabase = createClient();
   const activeQuestion = activeArticle?.questions?.find((q) => q.type === 'choix_ab');
@@ -176,13 +181,20 @@ export default function SeminarInterface({
       votesPour,
       votesContre,
       votesAbstention,
+      quorumAtteint,
+      typeMajorite,
       scribeText
     );
     setSavingAdoption(false);
     if (res.success) {
       setSelectedPropId('');
       setScribeText('');
-      alert("Article adopté et version incrémentée à la V1.0 !");
+      const messages: Record<string, string> = {
+        adopte: 'Article adopté et version incrémentée à la V1.0 !',
+        rejete: 'Proposition rejetée : la majorité requise n\'a pas été atteinte.',
+        reporte: 'Décision reportée : le quorum n\'était pas atteint.',
+      };
+      setDerniereDecision(messages[res.decision || 'adopte']);
       router.refresh();
     } else {
       alert("Erreur d'adoption: " + res.error);
@@ -221,7 +233,7 @@ export default function SeminarInterface({
   return (
     <div className="p-4 space-y-6">
       {/* Scribe / Participant Toggle */}
-      {(userRole === 'admin' || userRole === 'ben') && (
+      {peutOfficier && (
         <div className="flex bg-slate-100 p-1 rounded-xl">
           <button
             onClick={() => setIsScribeMode(false)}
@@ -378,6 +390,28 @@ export default function SeminarInterface({
                 </div>
               </div>
 
+              <div className="grid grid-cols-2 gap-2 items-center">
+                <label className="flex items-center space-x-2 text-[10px] font-bold text-slate-600 bg-slate-50 border border-gray-200 rounded-xl p-2.5">
+                  <input
+                    type="checkbox"
+                    checked={quorumAtteint}
+                    onChange={(e) => setQuorumAtteint(e.target.checked)}
+                    className="w-3.5 h-3.5"
+                  />
+                  <span>Quorum atteint en séance</span>
+                </label>
+
+                <select
+                  value={typeMajorite}
+                  onChange={(e) => setTypeMajorite(e.target.value as TypeMajorite)}
+                  className="p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-[10px] font-bold text-slate-700"
+                >
+                  <option value="simple">Majorité simple</option>
+                  <option value="absolue">Majorité absolue (50%+1)</option>
+                  <option value="qualifiee_2_3">Majorité qualifiée (2/3)</option>
+                </select>
+              </div>
+
               <button
                 type="submit"
                 disabled={savingAdoption}
@@ -388,8 +422,14 @@ export default function SeminarInterface({
                 ) : (
                   <Check className="w-3.5 h-3.5" />
                 )}
-                <span>Valider l'Adoption Plénière</span>
+                <span>Valider la décision de la plénière</span>
               </button>
+
+              {derniereDecision && (
+                <p role="status" aria-live="polite" className="text-[10px] font-bold text-center text-slate-700 bg-slate-50 border border-gray-200 rounded-xl p-2">
+                  {derniereDecision}
+                </p>
+              )}
             </form>
           )}
         </div>
@@ -461,7 +501,7 @@ export default function SeminarInterface({
           </div>
 
           {userVote && (
-            <div className="bg-green-50/20 border border-green-200/50 p-4 rounded-2xl flex items-center justify-center space-x-2 text-green-700 text-xs font-bold animate-fadeIn">
+            <div role="status" aria-live="polite" className="bg-green-50/20 border border-green-200/50 p-4 rounded-2xl flex items-center justify-center space-x-2 text-green-700 text-xs font-bold animate-fadeIn">
               <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping" />
               <span>Votre vote a été transmis et est projeté en direct à l'écran !</span>
             </div>

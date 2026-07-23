@@ -3,6 +3,7 @@ import { getDashboardSummary, getConsolidatedCorpus } from '@/lib/actions/admin'
 import BenDashboard from '@/components/ben-dashboard';
 import { redirect } from 'next/navigation';
 import { Shield } from 'lucide-react';
+import { getDemoRoleOverride } from '@/lib/utils/demo-role';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -21,7 +22,14 @@ export default async function DashboardPage() {
     .eq('id', user.id)
     .single();
 
-  if (!profile || !['admin', 'ben', 'comite_controle'].includes(profile.role)) {
+  // La simulation de rôle (démonstration/formation) permet de PRÉVISUALISER
+  // cette page sans changer le rôle réel : les écritures effectuées depuis
+  // cette console restent gouvernées par le rôle réel via les policies RLS,
+  // donc un rôle simulé ne débloque jamais d'action réelle.
+  const demoOverride = await getDemoRoleOverride();
+  const roleEffectif = demoOverride?.role ?? profile?.role;
+
+  if (!roleEffectif || !['admin', 'ben', 'comite_controle'].includes(roleEffectif)) {
     // If not authorized, redirect to main pages
     redirect('/textes');
   }

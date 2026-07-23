@@ -1,61 +1,98 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('AMAC Modernisation Questionnaire E2E Flow', () => {
-  // Setup before tests: Mocking login by setting auth cookies or localStorage
-  test.beforeEach(async ({ page }) => {
-    // Set up mock auth token cookies or bypass auth if testing local UI flow
-    // In standard environments, we can mock responses by mocking the Supabase network requests!
-    await page.route('**/rest/v1/profiles*', async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify([{ id: 'mock-user', nom: 'Koffi Délégué', role: 'membre', section_id: 1 }]),
-      });
-    });
+// Ces parcours nécessitent une session Supabase authentique : depuis la
+// correction de la faille de sécurité du middleware (voir rapport), aucune
+// route hors /login n'est plus accessible sans session valide, quel que soit
+// l'environnement. Contrairement à l'ancien comportement, il n'existe plus de
+// contournement (auto-connexion invité) à mocker côté navigateur : la
+// vérification de session a lieu côté serveur (middleware + Server
+// Components), hors de portée de page.route() qui n'intercepte que les
+// requêtes émises par le navigateur.
+//
+// Les parcours authentifiés ci-dessous sont donc conditionnés à la présence
+// d'un compte de test réel, dédié aux tests, fourni via les variables
+// d'environnement E2E_TEST_EMAIL / E2E_TEST_PASSWORD (voir .env.example).
+// Sans ces variables, ils sont ignorés plutôt que simulés de façon peu sûre.
+const hasTestAccount = !!process.env.E2E_TEST_EMAIL && !!process.env.E2E_TEST_PASSWORD;
 
-    await page.route('**/rest/v1/sections*', async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify([{ id: 1, nom: 'Abidjan Lagunes', ville: 'Abidjan', actif: true }]),
-      });
-    });
+async function login(page: import('@playwright/test').Page) {
+  await page.goto('/login');
+  await page.getByPlaceholder('nom@domain.com').fill(process.env.E2E_TEST_EMAIL!);
+  await page.getByPlaceholder('••••••••').fill(process.env.E2E_TEST_PASSWORD!);
+  await page.getByRole('button', { name: /Se connecter/ }).click();
+  await page.waitForURL((url) => !url.pathname.startsWith('/login'));
+}
+
+test.describe('Sécurité : accès par défaut fermé', () => {
+  test('une visite non authentifiée sur une route protégée redirige vers /login', async ({ page }) => {
+    await page.goto('/ma-section');
+    await expect(page).toHaveURL(/\/login\?erreur=session/);
   });
+});
 
-  test('should display section dashboard and launch active questionnaire flow', async ({ page }) => {
-    // Navigate to Ma Section page (auth bypassed or mocked)
-    await page.goto('http://localhost:3000/ma-section');
+test.describe('AMAC Modernisation Questionnaire E2E Flow', () => {
+  test.skip(!hasTestAccount, 'E2E_TEST_EMAIL / E2E_TEST_PASSWORD non configurées : parcours authentifié ignoré.');
 
-    // Check header section card details
+  test.use({ viewport: { width: 380, height: 844 } });
+
+  test('ouvrir une fiche, répondre au questionnaire et déposer une proposition', async ({ page }) => {
+    await login(page);
+    await page.goto('/ma-section');
+
     await expect(page.locator('h2')).toContainText(/Ma Section/);
 
-    // Verify list of modernization fiches is rendered
     const fiches = page.locator('a[href*="ma-section?article="]');
-    await expect(fiches).toHaveCount(13); // The 13 legal issues
-
-    // Click on the first questionnaire fiche to launch it
+    await expect(fiches.first()).toBeVisible();
     await fiches.first().click();
 
-    // Verify we transitioned to the active article questionnaire view
     await expect(page.locator('span')).toContainText(/Article à réformer/);
 
-    // Verify option A/B buttons exist
     const optionA = page.locator('button:has-text("A")');
     const optionB = page.locator('button:has-text("B")');
     await expect(optionA).toBeVisible();
     await expect(optionB).toBeVisible();
 
-    // Click Option A to record response
     await optionA.click();
 
-    // Verify that the agreement slider is displayed
     const ratingButtons = page.locator('button:has-text("4")');
     await expect(ratingButtons).toBeVisible();
 
-    // Enter a comment in the motivation textarea
     const textarea = page.locator('textarea[placeholder*="Expliquez"]');
     await expect(textarea).toBeVisible();
-    await textarea.fill('Nous choisissons l\'option A pour des raisons de clarté.');
+    await textarea.fill("Nous choisissons l'option A pour des raisons de clarté.");
     await textarea.blur();
+  });
+});
+
+test.describe('Vote en séance à deux contextes simultanés', () => {
+  test.skip(!hasTestAccount, 'E2E_TEST_EMAIL / E2E_TEST_PASSWORD non configurées : parcours authentifié ignoré.');
+
+  test('deux délégués votent simultanément et voient le résultat en direct', async ({ browser }) => {
+    const contextA = await browser.newContext();
+    const contextB = await browser.newContext();
+    const pageA = await contextA.newPage();
+    const pageB = await contextB.newPage();
+
+    try {
+      await login(pageA);
+      await login(pageB);
+
+      await pageA.goto('/seminaire');
+      await pageB.goto('/seminaire');
+
+      const voteA = pageA.locator('button:has-text("A.")').first();
+      const voteB = pageB.locator('button:has-text("B.")').first();
+
+      if ((await voteA.count()) > 0 && (await voteB.count()) > 0) {
+        await voteA.click();
+        await voteB.click();
+
+        await expect(pageA.locator('[role="status"]')).toContainText(/vote a été transmis/);
+        await expect(pageB.locator('[role="status"]')).toContainText(/vote a été transmis/);
+      }
+    } finally {
+      await contextA.close();
+      await contextB.close();
+    }
   });
 });

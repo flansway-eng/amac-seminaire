@@ -68,13 +68,6 @@ export default async function MaSectionPage({
     .select('*')
     .eq('profile_id', user.id);
 
-  const completedArticleIds = targetArticles.filter((art) => {
-    // Check if all questions for this article have a response
-    const artQuestions = art.questions || []; // We'll query them or fetch them
-    // Let's do a simple count check
-    return false; // Will override with real logic below
-  }).map(a => a.id);
-
   // Fetch questions for target articles
   const { data: allQuestions } = await supabase
     .from('questions')

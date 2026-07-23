@@ -4,6 +4,8 @@ import "./globals.css";
 import { createClient } from '@/lib/supabase/server';
 import Header from '@/components/header';
 import BottomNav from '@/components/bottom-nav';
+import { getDemoRoleOverride } from '@/lib/utils/demo-role';
+import { SECTIONS } from '@/lib/constants/labels';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,50 +37,58 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const supabase = await createClient();
-  
-  // Safe user fetch (does not fail if unauthenticated)
+
+  // Le middleware a déjà fermé l'accès si la session est invalide ; ici on ne
+  // fait que lire le profil pour l'affichage. Aucun repli fictif : si le
+  // profil est introuvable, l'utilisateur reste anonyme côté interface.
   let user = null;
   try {
     const { data } = await supabase.auth.getUser();
     user = data.user;
   } catch (err) {
-    console.warn('Failed to fetch user, using offline fallback', err);
+    console.warn('Impossible de récupérer la session utilisateur :', err);
   }
 
-  // Offline mock fallback if Supabase is offline/unconfigured
-  if (!user) {
-    user = {
-      id: 'mock-user-id-00000',
-      email: 'guest@amac.ci',
-      user_metadata: { nom: 'Koffi Délégué', role: 'admin', section_id: 1 }
-    } as any;
-  }
+  let profile: {
+    nom: string;
+    role: string;
+    section_id: number | null;
+    section_nom: string;
+    estSimule: boolean;
+  } | null = null;
 
-  let profile = {
-    nom: 'Koffi Délégué',
-    role: 'admin',
-    section_id: 1,
-    section_nom: 'Abidjan Lagunes',
-  };
-
-  if (user && user.id !== 'mock-user-id-00000') {
+  if (user) {
     try {
       const { data: rawProfile } = await supabase
         .from('profiles')
         .select('nom, role, section_id, sections(nom)')
         .eq('id', user.id)
         .maybeSingle();
-        
+
       if (rawProfile) {
         profile = {
           nom: rawProfile.nom,
           role: rawProfile.role,
           section_id: rawProfile.section_id,
-          section_nom: (rawProfile.sections as any)?.nom || 'Abidjan Lagunes',
+          section_nom: (rawProfile.sections as any)?.nom || '—',
+          estSimule: false,
         };
       }
     } catch (e) {
-      console.warn('Failed to fetch profile from Supabase, using mock fallback:', e);
+      console.warn('Impossible de récupérer le profil depuis Supabase :', e);
+    }
+
+    // Simulation de rôle (démonstration/formation) : n'affecte que
+    // l'affichage, jamais les droits réels — voir src/lib/utils/demo-role.ts.
+    const demoOverride = await getDemoRoleOverride();
+    if (demoOverride && profile) {
+      profile = {
+        ...profile,
+        role: demoOverride.role,
+        section_id: demoOverride.sectionId,
+        section_nom: SECTIONS[demoOverride.sectionId as keyof typeof SECTIONS] || profile.section_nom,
+        estSimule: true,
+      };
     }
   }
 

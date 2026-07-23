@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { DashboardSummary, preArbitrateProposition, adoptPropositionDirectly } from '@/lib/actions/admin';
+import { TypeMajorite } from '@/lib/utils/majorite';
 import { Proposition, Article } from '@/lib/types';
 import { Check, X, Shield, RefreshCw, Send, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -28,8 +29,11 @@ export default function BenDashboard({
   const [votesPour, setVotesPour] = useState<number>(35);
   const [votesContre, setVotesContre] = useState<number>(5);
   const [abstentions, setAbstentions] = useState<number>(2);
+  const [quorumAtteint, setQuorumAtteint] = useState(true);
+  const [typeMajorite, setTypeMajorite] = useState<TypeMajorite>('absolue');
   const [savingAdoption, setSavingAdoption] = useState(false);
   const [errorAdoption, setErrorAdoption] = useState<string | null>(null);
+  const [resultatAdoption, setResultatAdoption] = useState<string | null>(null);
 
   const handlePreArbitrate = async (propId: string, status: 'pre_arbitree' | 'rejetee') => {
     const res = await preArbitrateProposition(propId, status);
@@ -51,11 +55,19 @@ export default function BenDashboard({
       adoptingProp.id,
       votesPour,
       votesContre,
-      abstentions
+      abstentions,
+      quorumAtteint,
+      typeMajorite
     );
-    
+
     setSavingAdoption(false);
     if (res.success) {
+      const messages: Record<string, string> = {
+        adopte: 'Proposition adoptée (V1.0).',
+        rejete: "Proposition rejetée : la majorité requise n'a pas été atteinte.",
+        reporte: 'Décision reportée : le quorum n\'était pas atteint.',
+      };
+      setResultatAdoption(messages[res.decision || 'adopte']);
       setAdoptingProp(null);
       router.refresh();
     } else {
@@ -68,6 +80,12 @@ export default function BenDashboard({
 
   return (
     <div className="space-y-6">
+      {resultatAdoption && (
+        <p role="status" aria-live="polite" className="text-xs font-bold text-center text-slate-700 bg-slate-50 border border-gray-200 rounded-2xl p-3">
+          {resultatAdoption}
+        </p>
+      )}
+
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-white p-4 border border-gray-150 rounded-2xl shadow-sm">
@@ -319,6 +337,31 @@ export default function BenDashboard({
                   onChange={(e) => setAbstentions(Number(e.target.value))}
                   className="w-full p-2 bg-slate-50 border border-gray-200 rounded-xl text-xs focus:outline-none"
                 />
+              </div>
+
+              <label className="flex items-center space-x-2 text-[10px] font-bold text-gray-600 bg-slate-50 border border-gray-200 rounded-xl p-2.5">
+                <input
+                  type="checkbox"
+                  checked={quorumAtteint}
+                  onChange={(e) => setQuorumAtteint(e.target.checked)}
+                  className="w-3.5 h-3.5"
+                />
+                <span>Quorum atteint en séance</span>
+              </label>
+
+              <div>
+                <label className="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">
+                  Type de majorité requise
+                </label>
+                <select
+                  value={typeMajorite}
+                  onChange={(e) => setTypeMajorite(e.target.value as TypeMajorite)}
+                  className="w-full p-2 bg-slate-50 border border-gray-200 rounded-xl text-xs focus:outline-none"
+                >
+                  <option value="simple">Majorité simple</option>
+                  <option value="absolue">Majorité absolue (50%+1)</option>
+                  <option value="qualifiee_2_3">Majorité qualifiée (2/3)</option>
+                </select>
               </div>
             </div>
 
