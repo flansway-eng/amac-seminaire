@@ -1,0 +1,425 @@
+[
+  {
+    "numero": 1,
+    "numero_affiche": "Article 1",
+    "titre": "Article 1",
+    "contenu_actuel": "Contenu standard de l'article 1 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE I - ADHESION - COTISATIONS",
+    "chapitre": null,
+    "ordre": 1
+  },
+  {
+    "numero": 2,
+    "numero_affiche": "Article 2",
+    "titre": "Article 2",
+    "contenu_actuel": "Contenu standard de l'article 2 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE I - ADHESION - COTISATIONS",
+    "chapitre": null,
+    "ordre": 2
+  },
+  {
+    "numero": 3,
+    "numero_affiche": "Article 3",
+    "titre": "Article 3",
+    "contenu_actuel": "Contenu standard de l'article 3 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE I - ADHESION - COTISATIONS",
+    "chapitre": null,
+    "ordre": 3
+  },
+  {
+    "numero": 4,
+    "numero_affiche": "Article 4",
+    "titre": "Article 4",
+    "contenu_actuel": "Contenu standard de l'article 4 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE I - ADHESION - COTISATIONS",
+    "chapitre": null,
+    "ordre": 4
+  },
+  {
+    "numero": 5,
+    "numero_affiche": "Article 5",
+    "titre": "Article 5",
+    "contenu_actuel": "Contenu standard de l'article 5 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 5
+  },
+  {
+    "numero": 6,
+    "numero_affiche": "Article 6",
+    "titre": "Frais de carte de membre",
+    "contenu_actuel": "Les frais d'acquisition de la carte d'adhérent et le montant de la cotisation mensuelle sont fixés par le Bureau Exécutif National et payables d'avance.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 6
+  },
+  {
+    "numero": 7,
+    "numero_affiche": "Article 7",
+    "titre": "Article 7",
+    "contenu_actuel": "Contenu standard de l'article 7 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 7
+  },
+  {
+    "numero": 8,
+    "numero_affiche": "Article 8",
+    "titre": "Article 8",
+    "contenu_actuel": "Contenu standard de l'article 8 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 8
+  },
+  {
+    "numero": 9,
+    "numero_affiche": "Article 9",
+    "titre": "Article 9",
+    "contenu_actuel": "Contenu standard de l'article 9 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 9
+  },
+  {
+    "numero": 10,
+    "numero_affiche": "Article 10",
+    "titre": "Article 10",
+    "contenu_actuel": "Contenu standard de l'article 10 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 10
+  },
+  {
+    "numero": 11,
+    "numero_affiche": "Article 11",
+    "titre": "Article 11",
+    "contenu_actuel": "Contenu standard de l'article 11 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 11
+  },
+  {
+    "numero": 12,
+    "numero_affiche": "Article 12",
+    "titre": "Article 12",
+    "contenu_actuel": "Contenu standard de l'article 12 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 12
+  },
+  {
+    "numero": 13,
+    "numero_affiche": "Article 13",
+    "titre": "Article 13",
+    "contenu_actuel": "Contenu standard de l'article 13 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 13
+  },
+  {
+    "numero": 14,
+    "numero_affiche": "Article 14",
+    "titre": "Article 14",
+    "contenu_actuel": "Contenu standard de l'article 14 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 14
+  },
+  {
+    "numero": 15,
+    "numero_affiche": "Article 15",
+    "titre": "Article 15",
+    "contenu_actuel": "Contenu standard de l'article 15 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
+    "chapitre": null,
+    "ordre": 15
+  },
+  {
+    "numero": 16,
+    "numero_affiche": "Article 16",
+    "titre": "Procédure d'exclusion",
+    "contenu_actuel": "En cas d'exclusion d'un membre pour faute grave, la procédure disciplinaire est régie par l'Article 6 ci-dessus, garantissant le droit de parole du membre.",
+    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
+    "chapitre": null,
+    "ordre": 16
+  },
+  {
+    "numero": 17,
+    "numero_affiche": "Article 17",
+    "titre": "Article 17",
+    "contenu_actuel": "Contenu standard de l'article 17 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
+    "chapitre": null,
+    "ordre": 17
+  },
+  {
+    "numero": 18,
+    "numero_affiche": "Article 18",
+    "titre": "Article 18",
+    "contenu_actuel": "Contenu standard de l'article 18 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
+    "chapitre": null,
+    "ordre": 18
+  },
+  {
+    "numero": 19,
+    "numero_affiche": "Article 19",
+    "titre": "Article 19",
+    "contenu_actuel": "Contenu standard de l'article 19 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
+    "chapitre": null,
+    "ordre": 19
+  },
+  {
+    "numero": 20,
+    "numero_affiche": "Article 20",
+    "titre": "Scrutins et vote des fondateurs",
+    "contenu_actuel": "Les membres fondateurs ne disposent pas de droit de vote lors des scrutins de l'assemblée, en conformité avec les statuts.",
+    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
+    "chapitre": null,
+    "ordre": 20
+  },
+  {
+    "numero": 21,
+    "numero_affiche": "Article 21",
+    "titre": "Article 21",
+    "contenu_actuel": "Contenu standard de l'article 21 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
+    "chapitre": null,
+    "ordre": 21
+  },
+  {
+    "numero": 22,
+    "numero_affiche": "Article 22",
+    "titre": "Article 22",
+    "contenu_actuel": "Contenu standard de l'article 22 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
+    "chapitre": null,
+    "ordre": 22
+  },
+  {
+    "numero": 23,
+    "numero_affiche": "Article 23",
+    "titre": "Article 23",
+    "contenu_actuel": "Contenu standard de l'article 23 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
+    "chapitre": null,
+    "ordre": 23
+  },
+  {
+    "numero": 24,
+    "numero_affiche": "Article 24",
+    "titre": "Délégation de vote",
+    "contenu_actuel": "Le vote par procuration est restreint aux membres fondateurs empêchés lors de la réunion de l'assemblée générale.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
+    "ordre": 24
+  },
+  {
+    "numero": 25,
+    "numero_affiche": "Article 25",
+    "titre": "Composition du Comité de Contrôle",
+    "contenu_actuel": "Le Comité de Contrôle est composé exclusivement de membres fondateurs, afin de garantir l'indépendance de leur mission d'audit.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
+    "ordre": 25
+  },
+  {
+    "numero": 26,
+    "numero_affiche": "Article 26",
+    "titre": "Article 26",
+    "contenu_actuel": "Contenu standard de l'article 26 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
+    "ordre": 26
+  },
+  {
+    "numero": 27,
+    "numero_affiche": "Article 27",
+    "titre": "Article 27",
+    "contenu_actuel": "Contenu standard de l'article 27 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
+    "ordre": 27
+  },
+  {
+    "numero": 28,
+    "numero_affiche": "Article 28",
+    "titre": "Article 28",
+    "contenu_actuel": "Contenu standard de l'article 28 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
+    "ordre": 28
+  },
+  {
+    "numero": 29,
+    "numero_affiche": "Article 29",
+    "titre": "Article 29",
+    "contenu_actuel": "Contenu standard de l'article 29 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
+    "ordre": 29
+  },
+  {
+    "numero": 30,
+    "numero_affiche": "Article 30",
+    "titre": "Intérim de la Présidence",
+    "contenu_actuel": "En cas d'empêchement temporaire du Président, le Vice-Président assure l'intérim de la présidence du Bureau Exécutif comme prévu à l'article 26 des statuts.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
+    "ordre": 30
+  },
+  {
+    "numero": 31,
+    "numero_affiche": "Article 31",
+    "titre": "Article 31",
+    "contenu_actuel": "Contenu standard de l'article 31 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE II - LE COMITE DE CONTROLE",
+    "ordre": 31
+  },
+  {
+    "numero": 32,
+    "numero_affiche": "Article 32",
+    "titre": "Article 32",
+    "contenu_actuel": "Contenu standard de l'article 32 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE II - LE COMITE DE CONTROLE",
+    "ordre": 32
+  },
+  {
+    "numero": 33,
+    "numero_affiche": "Article 33",
+    "titre": "Article 33",
+    "contenu_actuel": "Contenu standard de l'article 33 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE II - LE COMITE DE CONTROLE",
+    "ordre": 33
+  },
+  {
+    "numero": 34,
+    "numero_affiche": "Article 34",
+    "titre": "Article 34",
+    "contenu_actuel": "Contenu standard de l'article 34 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
+    "chapitre": "CHAPITRE II - LE COMITE DE CONTROLE",
+    "ordre": 34
+  },
+  {
+    "numero": 35,
+    "numero_affiche": "Article 35",
+    "titre": "Article 35",
+    "contenu_actuel": "Contenu standard de l'article 35 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE V - DE LA SECTION LOCALE",
+    "chapitre": null,
+    "ordre": 35
+  },
+  {
+    "numero": 36,
+    "numero_affiche": "Article 36",
+    "titre": "Article 36",
+    "contenu_actuel": "Contenu standard de l'article 36 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE V - DE LA SECTION LOCALE",
+    "chapitre": null,
+    "ordre": 36
+  },
+  {
+    "numero": 37,
+    "numero_affiche": "Article 37",
+    "titre": "Article 37",
+    "contenu_actuel": "Contenu standard de l'article 37 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE V - DE LA SECTION LOCALE",
+    "chapitre": null,
+    "ordre": 37
+  },
+  {
+    "numero": 38,
+    "numero_affiche": "Article 38",
+    "titre": "Article 38",
+    "contenu_actuel": "Contenu standard de l'article 38 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE V - DE LA SECTION LOCALE",
+    "chapitre": null,
+    "ordre": 38
+  },
+  {
+    "numero": 39,
+    "numero_affiche": "Article 39",
+    "titre": "Article 39",
+    "contenu_actuel": "Contenu standard de l'article 39 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE V - DE LA SECTION LOCALE",
+    "chapitre": null,
+    "ordre": 39
+  },
+  {
+    "numero": 40,
+    "numero_affiche": "Article 40",
+    "titre": "Article 40",
+    "contenu_actuel": "Contenu standard de l'article 40 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE V - DISPOSITIONS FINANCIERES",
+    "chapitre": null,
+    "ordre": 40
+  },
+  {
+    "numero": 41,
+    "numero_affiche": "Article 41",
+    "titre": "Article 41",
+    "contenu_actuel": "Contenu standard de l'article 41 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE V - DISPOSITIONS FINANCIERES",
+    "chapitre": null,
+    "ordre": 41
+  },
+  {
+    "numero": 42,
+    "numero_affiche": "Article 42",
+    "titre": "Article 42",
+    "contenu_actuel": "Contenu standard de l'article 42 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE V - DISPOSITIONS FINANCIERES",
+    "chapitre": null,
+    "ordre": 42
+  },
+  {
+    "numero": 43,
+    "numero_affiche": "Article 43",
+    "titre": "Article 43",
+    "contenu_actuel": "Contenu standard de l'article 43 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE V - DISPOSITIONS FINANCIERES",
+    "chapitre": null,
+    "ordre": 43
+  },
+  {
+    "numero": 44,
+    "numero_affiche": "Article 44",
+    "titre": "Révision du Règlement Intérieur",
+    "contenu_actuel": "Les modifications du règlement intérieur sont adoptées conformément à l'article 20 des statuts de l'association.",
+    "titre_parent": "TITRE VII - DISPOSITIONS FINALES",
+    "chapitre": null,
+    "ordre": 44
+  },
+  {
+    "numero": 45,
+    "numero_affiche": "Article 45",
+    "titre": "Article 45",
+    "contenu_actuel": "Contenu standard de l'article 45 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE VII - DISPOSITIONS FINALES",
+    "chapitre": null,
+    "ordre": 45
+  },
+  {
+    "numero": 46,
+    "numero_affiche": "Article 46",
+    "titre": "Article 46",
+    "contenu_actuel": "Contenu standard de l'article 46 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE VII - DISPOSITIONS FINALES",
+    "chapitre": null,
+    "ordre": 46
+  },
+  {
+    "numero": 47,
+    "numero_affiche": "Article 47",
+    "titre": "Article 47",
+    "contenu_actuel": "Contenu standard de l'article 47 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
+    "titre_parent": "TITRE VII - DISPOSITIONS FINALES",
+    "chapitre": null,
+    "ordre": 47
+  }
+]

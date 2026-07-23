@@ -1,0 +1,17 @@
+{
+  "name": "AMAC Gouvernance 2.0",
+  "short_name": "AMAC Gov",
+  "description": "Plateforme de Réforme et Toilettage des Textes Fondateurs de l'AMAC",
+  "start_url": "/textes",
+  "display": "standalone",
+  "background_color": "#fcfcfc",
+  "theme_color": "#E8730C",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}
