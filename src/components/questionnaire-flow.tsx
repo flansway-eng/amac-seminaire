@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Article, Question, Reponse } from '@/lib/types';
 import { saveResponse, saveProposition } from '@/lib/actions/responses';
-import { Check, Loader2, Sparkles, Send, FileText, AlertCircle } from 'lucide-react';
+import { Check, Loader2, Sparkles, Send, FileText, AlertCircle, Mic, MicOff } from 'lucide-react';
 
 interface QuestionnaireFlowProps {
   article: Article;
@@ -33,6 +33,63 @@ export default function QuestionnaireFlow({
   // AI state
   const [aiLoading, setAiLoading] = useState(false);
 
+  // Speech and local form state
+  const [localComment, setLocalComment] = useState('');
+  const [activeSpeechField, setActiveSpeechField] = useState<'comment' | 'textePropose' | 'exposeMotifs' | null>(null);
+
+  const toggleSpeechRecognition = (
+    field: 'comment' | 'textePropose' | 'exposeMotifs',
+    currentValue: string,
+    setValue: (val: string) => void
+  ) => {
+    if (activeSpeechField === field) {
+      setActiveSpeechField(null);
+      return;
+    }
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("La reconnaissance vocale n'est pas supportée par votre navigateur. Veuillez utiliser Google Chrome ou Edge.");
+      return;
+    }
+
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'fr-FR';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onstart = () => {
+        setActiveSpeechField(field);
+      };
+
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        const newValue = currentValue ? `${currentValue.trim()} ${transcript}` : transcript;
+        setValue(newValue);
+        
+        // If it's the comment field, trigger auto-save directly
+        if (field === 'comment') {
+          handleSave(currentQuestion.id, responses[currentQuestion.id]?.value || {}, newValue);
+        }
+      };
+
+      recognition.onerror = (event: any) => {
+        console.error("Speech recognition error:", event.error);
+        setActiveSpeechField(null);
+      };
+
+      recognition.onend = () => {
+        setActiveSpeechField(null);
+      };
+
+      recognition.start();
+    } catch (err) {
+      console.error("Speech recognition start failed:", err);
+      setActiveSpeechField(null);
+    }
+  };
+
   // Initialize responses from DB if exist
   useEffect(() => {
     const initialMap: Record<number, { value: any; comment: string }> = {};
@@ -47,6 +104,13 @@ export default function QuestionnaireFlow({
 
   const currentQuestion = questions[currentStep];
   const isLastQuestion = currentStep === questions.length;
+
+  // Sync localComment with current question
+  useEffect(() => {
+    if (currentQuestion) {
+      setLocalComment(responses[currentQuestion.id]?.comment || '');
+    }
+  }, [currentStep, responses, currentQuestion]);
 
   const handleSave = async (questionId: number, value: any, comment: string) => {
     if (!value) return;
@@ -304,12 +368,37 @@ export default function QuestionnaireFlow({
 
             {/* Motivation Comment */}
             <div>
-              <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">
-                Commentaire de motivation (Facultatif)
-              </label>
+              <div className="flex justify-between items-center mb-1.5">
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                  Commentaire de motivation (Facultatif)
+                </label>
+                <button
+                  type="button"
+                  onClick={() => toggleSpeechRecognition('comment', localComment, setLocalComment)}
+                  className={`px-2 py-0.5 rounded-full transition-all flex items-center space-x-1 text-[9px] font-bold border ${
+                    activeSpeechField === 'comment'
+                      ? 'bg-red-50 text-red-600 border-red-200 animate-pulse'
+                      : 'bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-700 border-gray-200'
+                  }`}
+                  title="Saisie vocale"
+                >
+                  {activeSpeechField === 'comment' ? (
+                    <>
+                      <MicOff className="w-3 h-3 text-red-600" />
+                      <span>Écoute...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Mic className="w-3 h-3 text-slate-400" />
+                      <span>Dicter</span>
+                    </>
+                  )}
+                </button>
+              </div>
               <textarea
-                defaultValue={responses[currentQuestion.id]?.comment || ''}
-                onBlur={(e) => handleCommentBlur(e.target.value)}
+                value={localComment}
+                onChange={(e) => setLocalComment(e.target.value)}
+                onBlur={() => handleSave(currentQuestion.id, responses[currentQuestion.id]?.value || {}, localComment)}
                 placeholder="Expliquez brièvement votre choix pour orienter le scribe..."
                 rows={3}
                 className="w-full p-3 bg-slate-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#E8730C] focus:bg-white transition-all text-gray-900"
@@ -405,9 +494,33 @@ export default function QuestionnaireFlow({
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">
-                    Texte de l'article amendé proposé
-                  </label>
+                  <div className="flex justify-between items-center mb-1.5">
+                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+                      Texte de l'article amendé proposé
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => toggleSpeechRecognition('textePropose', textePropose, setTextePropose)}
+                      className={`px-2 py-0.5 rounded-full transition-all flex items-center space-x-1 text-[9px] font-bold border ${
+                        activeSpeechField === 'textePropose'
+                          ? 'bg-red-50 text-red-600 border-red-200 animate-pulse'
+                          : 'bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-700 border-gray-200'
+                      }`}
+                      title="Saisie vocale"
+                    >
+                      {activeSpeechField === 'textePropose' ? (
+                        <>
+                          <MicOff className="w-3 h-3 text-red-600" />
+                          <span>Écoute...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Mic className="w-3 h-3 text-slate-400" />
+                          <span>Dicter</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                   <textarea
                     value={textePropose}
                     onChange={(e) => setTextePropose(e.target.value)}
@@ -418,9 +531,33 @@ export default function QuestionnaireFlow({
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">
-                    Exposé des motifs de la réforme
-                  </label>
+                  <div className="flex justify-between items-center mb-1.5">
+                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+                      Exposé des motifs de la réforme
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => toggleSpeechRecognition('exposeMotifs', exposeMotifs, setExposeMotifs)}
+                      className={`px-2 py-0.5 rounded-full transition-all flex items-center space-x-1 text-[9px] font-bold border ${
+                        activeSpeechField === 'exposeMotifs'
+                          ? 'bg-red-50 text-red-600 border-red-200 animate-pulse'
+                          : 'bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-700 border-gray-200'
+                      }`}
+                      title="Saisie vocale"
+                    >
+                      {activeSpeechField === 'exposeMotifs' ? (
+                        <>
+                          <MicOff className="w-3 h-3 text-red-600" />
+                          <span>Écoute...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Mic className="w-3 h-3 text-slate-400" />
+                          <span>Dicter</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                   <textarea
                     value={exposeMotifs}
                     onChange={(e) => setExposeMotifs(e.target.value)}
