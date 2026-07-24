@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Article } from '@/lib/types';
 import { SEVERITIES, ENJEU_TYPES, isContenuPlaceholder } from '@/lib/constants/labels';
-import { ChevronLeft, ChevronRight, AlertTriangle, Link as LinkIcon, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, AlertTriangle, Link as LinkIcon, Sparkles, FileText } from 'lucide-react';
 import Link from 'next/link';
 
 interface SwipeableCardProps {
@@ -243,13 +243,21 @@ export default function SwipeableCard({
           <span>Précédent</span>
         </button>
 
-        {article.questions && article.questions.length > 0 && (
+        {article.questions && article.questions.length > 0 ? (
           <Link
             href={`/ma-section?article=${article.id}`}
             className="flex items-center space-x-1 px-4 py-2 text-xs font-bold text-white bg-[#128A3E] hover:bg-[#0d6b2f] rounded-xl shadow-md transition-all active:scale-[0.98]"
           >
             <Sparkles className="w-3.5 h-3.5 fill-white" />
             <span>Moderniser</span>
+          </Link>
+        ) : (
+          <Link
+            href={`/ma-section?article=${article.id}`}
+            className="flex items-center space-x-1 px-4 py-2 text-xs font-bold text-white bg-slate-800 hover:bg-slate-700 rounded-xl shadow-md transition-all active:scale-[0.98]"
+          >
+            <FileText className="w-3.5 h-3.5 text-white" />
+            <span>Amender</span>
           </Link>
         )}
 

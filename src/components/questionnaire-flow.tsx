@@ -319,35 +319,49 @@ export default function QuestionnaireFlow({
         ) : (
           // SUMMARY & PROPOSITION
           <div className="space-y-6">
-            <div className="bg-[#128A3E]/5 border border-green-150 rounded-2xl p-4 flex items-start space-x-3">
-              <Check className="w-5 h-5 text-[#128A3E] mt-0.5" />
-              <div>
-                <h4 className="text-xs font-bold text-slate-800">Questionnaire terminé</h4>
-                <p className="text-[10px] text-slate-500 leading-relaxed mt-0.5">
-                  Vos réponses ont été enregistrées avec succès. Vous pouvez maintenant soumettre une proposition de rédaction amendée ou générer une formulation automatique.
-                </p>
-              </div>
-            </div>
-
-            {/* Synthesis list */}
-            <div className="space-y-2.5">
-              <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                Synthèse de vos choix
-              </h4>
-              {questions.map((q) => {
-                const resp = responses[q.id];
-                const choice = resp?.value?.reponse;
-                const note = resp?.value?.note;
-                return (
-                  <div key={q.id} className="p-3 bg-slate-50 border border-gray-150 rounded-xl flex justify-between items-center text-xs">
-                    <span className="text-slate-600 font-medium line-clamp-1 pr-4">{q.intitule}</span>
-                    <span className="font-bold text-[#E8730C] shrink-0 bg-white px-2 py-0.5 rounded-lg border">
-                      Option {choice || 'N/A'} ({note || '0'}/5)
-                    </span>
+            {questions.length > 0 ? (
+              <>
+                <div className="bg-[#128A3E]/5 border border-green-150 rounded-2xl p-4 flex items-start space-x-3">
+                  <Check className="w-5 h-5 text-[#128A3E] mt-0.5" />
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-800">Questionnaire terminé</h4>
+                    <p className="text-[10px] text-slate-500 leading-relaxed mt-0.5">
+                      Vos réponses ont été enregistrées avec succès. Vous pouvez maintenant soumettre une proposition de rédaction amendée ou générer une formulation automatique.
+                    </p>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+
+                {/* Synthesis list */}
+                <div className="space-y-2.5">
+                  <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                    Synthèse de vos choix
+                  </h4>
+                  {questions.map((q) => {
+                    const resp = responses[q.id];
+                    const choice = resp?.value?.reponse;
+                    const note = resp?.value?.note;
+                    return (
+                      <div key={q.id} className="p-3 bg-slate-50 border border-gray-150 rounded-xl flex justify-between items-center text-xs">
+                        <span className="text-slate-600 font-medium line-clamp-1 pr-4">{q.intitule}</span>
+                        <span className="font-bold text-[#E8730C] shrink-0 bg-white px-2 py-0.5 rounded-lg border">
+                          Option {choice || 'N/A'} ({note || '0'}/5)
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            ) : (
+              <div className="bg-slate-50 border border-gray-150 rounded-2xl p-4 flex items-start space-x-3">
+                <FileText className="w-5 h-5 text-slate-500 mt-0.5" />
+                <div>
+                  <h4 className="text-xs font-bold text-slate-800">Aucun enjeu juridique prédéfini</h4>
+                  <p className="text-[10px] text-slate-500 leading-relaxed mt-0.5">
+                    Cet article est déjà conforme. Vous pouvez néanmoins l'amender librement ou utiliser l'intelligence artificielle pour suggérer une reformulation.
+                  </p>
+                </div>
+              </div>
+            )}
 
             {/* Actions for propositions */}
             {!showPropForm ? (

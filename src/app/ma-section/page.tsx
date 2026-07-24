@@ -82,7 +82,21 @@ export default async function MaSectionPage({
 
   // If an article is selected, render the questionnaire flow
   if (selectedArticleId) {
-    const selectedArticle = articlesMapped.find((a) => a.id === selectedArticleId);
+    let selectedArticle = articlesMapped.find((a) => a.id === selectedArticleId);
+    
+    if (!selectedArticle) {
+      const art = allArticles.find((a) => a.id === selectedArticleId);
+      if (art) {
+        selectedArticle = {
+          ...art,
+          questions: [],
+          completed: false,
+          answeredCount: 0,
+          totalQuestions: 0,
+        };
+      }
+    }
+
     if (selectedArticle) {
       const initialResponses = await getUserResponsesForArticle(selectedArticleId);
 
@@ -118,7 +132,7 @@ export default async function MaSectionPage({
 
           <QuestionnaireFlow
             article={selectedArticle}
-            questions={selectedArticle.questions}
+            questions={selectedArticle.questions || []}
             initialResponses={initialResponses}
             onComplete={handleComplete}
           />
