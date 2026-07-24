@@ -1,81 +1,73 @@
 import { test, expect } from '@playwright/test';
 
-// Ces parcours nécessitent une session Supabase authentique : depuis la
-// correction de la faille de sécurité du middleware (voir rapport), aucune
-// route hors /login n'est plus accessible sans session valide, quel que soit
-// l'environnement. Contrairement à l'ancien comportement, il n'existe plus de
-// contournement (auto-connexion invité) à mocker côté navigateur : la
-// vérification de session a lieu côté serveur (middleware + Server
-// Components), hors de portée de page.route() qui n'intercepte que les
-// requêtes émises par le navigateur.
-//
-// Les parcours authentifiés ci-dessous sont donc conditionnés à la présence
-// d'un compte de test réel, dédié aux tests, fourni via les variables
-// d'environnement E2E_TEST_EMAIL / E2E_TEST_PASSWORD (voir .env.example).
-// Sans ces variables, ils sont ignorés plutôt que simulés de façon peu sûre.
-const hasTestAccount = !!process.env.E2E_TEST_EMAIL && !!process.env.E2E_TEST_PASSWORD;
+// Plus de compte, plus de mot de passe : un participant rejoint via
+// /rejoindre?section=<slug> en ne saisissant que son nom. Ces parcours
+// nécessitent un projet Supabase réellement configuré (SUPABASE_SERVICE_ROLE_KEY),
+// puisque /rejoindre crée un vrai participant en base.
 
-async function login(page: import('@playwright/test').Page) {
-  await page.goto('/login');
-  await page.getByPlaceholder('nom@domain.com').fill(process.env.E2E_TEST_EMAIL!);
-  await page.getByPlaceholder('••••••••').fill(process.env.E2E_TEST_PASSWORD!);
-  await page.getByRole('button', { name: /Se connecter/ }).click();
-  await page.waitForURL((url) => !url.pathname.startsWith('/login'));
+async function rejoindre(page: import('@playwright/test').Page, nom: string) {
+  await page.goto('/rejoindre');
+  await page.getByPlaceholder('Votre nom complet').fill(nom);
+  await page.locator('select[name="section"]').selectOption({ index: 1 });
+  await page.getByRole('button', { name: /Entrer/ }).click();
+  await page.waitForURL((url) => !url.pathname.startsWith('/rejoindre'));
 }
 
-test.describe('Sécurité : accès par défaut fermé', () => {
-  test('une visite non authentifiée sur une route protégée redirige vers /login', async ({ page }) => {
-    await page.goto('/ma-section');
-    await expect(page).toHaveURL(/\/login\?erreur=session/);
+test.describe('Sécurité : accès par défaut fermé, jamais vers /login', () => {
+  test('une visite non authentifiée sur une route protégée redirige vers /rejoindre, pas /login', async ({ page }) => {
+    await page.goto('/ben/liens');
+    await expect(page).toHaveURL(/\/rejoindre\?suite=/);
+    await expect(page).not.toHaveURL(/\/login/);
   });
 });
 
-test.describe('AMAC Modernisation Questionnaire E2E Flow', () => {
-  test.skip(!hasTestAccount, 'E2E_TEST_EMAIL / E2E_TEST_PASSWORD non configurées : parcours authentifié ignoré.');
-
+test.describe('Parcours complet sans compte (mobile 380px)', () => {
   test.use({ viewport: { width: 380, height: 844 } });
 
-  test('ouvrir une fiche, répondre au questionnaire et déposer une proposition', async ({ page }) => {
-    await login(page);
+  test('rejoindre → ouvrir une fiche → répondre au questionnaire → déposer une proposition, sans aucun écran de connexion', async ({ page }) => {
+    // On ne connaît pas de slug de section réel sans base configurée : on
+    // récupère la première section proposée par l'écran d'entrée.
+    await page.goto('/rejoindre');
+
+    // Aucun écran de connexion (email/mot de passe) ne doit jamais
+    // apparaître dans ce parcours.
+    await expect(page.locator('input[type="password"]')).toHaveCount(0);
+    await expect(page.locator('input[name="email"]')).toHaveCount(0);
+
+    await page.getByPlaceholder('Votre nom complet').fill('Test Playwright');
+    await page.locator('select[name="section"]').selectOption({ index: 1 });
+    await page.getByRole('button', { name: /Entrer/ }).click();
+    await page.waitForURL((url) => !url.pathname.startsWith('/rejoindre'));
+
+    // Toujours aucun écran de connexion après l'entrée.
+    await expect(page.locator('input[type="password"]')).toHaveCount(0);
+
     await page.goto('/ma-section');
-
-    await expect(page.locator('h2')).toContainText(/Ma Section/);
-
     const fiches = page.locator('a[href*="ma-section?article="]');
-    await expect(fiches.first()).toBeVisible();
+    await expect(fiches.first()).toBeVisible({ timeout: 10000 });
     await fiches.first().click();
 
-    await expect(page.locator('span')).toContainText(/Article à réformer/);
-
-    const optionA = page.locator('button:has-text("A")');
-    const optionB = page.locator('button:has-text("B")');
+    const optionA = page.locator('button:has-text("A")').first();
     await expect(optionA).toBeVisible();
-    await expect(optionB).toBeVisible();
-
     await optionA.click();
-
-    const ratingButtons = page.locator('button:has-text("4")');
-    await expect(ratingButtons).toBeVisible();
 
     const textarea = page.locator('textarea[placeholder*="Expliquez"]');
     await expect(textarea).toBeVisible();
-    await textarea.fill("Nous choisissons l'option A pour des raisons de clarté.");
+    await textarea.fill("Proposition de test déposée depuis Playwright.");
     await textarea.blur();
   });
 });
 
 test.describe('Vote en séance à deux contextes simultanés', () => {
-  test.skip(!hasTestAccount, 'E2E_TEST_EMAIL / E2E_TEST_PASSWORD non configurées : parcours authentifié ignoré.');
-
-  test('deux délégués votent simultanément et voient le résultat en direct', async ({ browser }) => {
+  test('deux participants rejoignent et votent simultanément sur le même article', async ({ browser }) => {
     const contextA = await browser.newContext();
     const contextB = await browser.newContext();
     const pageA = await contextA.newPage();
     const pageB = await contextB.newPage();
 
     try {
-      await login(pageA);
-      await login(pageB);
+      await rejoindre(pageA, 'Déléguée A');
+      await rejoindre(pageB, 'Délégué B');
 
       await pageA.goto('/seminaire');
       await pageB.goto('/seminaire');

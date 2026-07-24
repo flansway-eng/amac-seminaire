@@ -46,7 +46,7 @@ describe('Consolidation & Renumbering Engine', () => {
       {
         id: 'prop-1',
         article_id: 1,
-        auteur_id: 'user-1',
+        participant_id: 'participant-1',
         texte_propose: "L'association est régie par la loi du 21/09/1960.",
         expose_motifs: "Date de loi exacte.",
         statut: 'adoptee',
@@ -61,6 +61,7 @@ describe('Consolidation & Renumbering Engine', () => {
         id: 'dec-1',
         article_id: 1,
         proposition_id: 'prop-1',
+        participant_id: 'participant-1',
         decision: 'adopte',
         quorum_atteint: true,
         votes_pour: 40,

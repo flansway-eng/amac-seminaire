@@ -1,6 +1,7 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { lireParticipant } from '@/lib/session';
 import { Reponse, Proposition, PropositionStatut } from '@/lib/types';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
@@ -27,43 +28,29 @@ export async function saveResponse(
     return { success: false, error: result.error.errors[0].message };
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return { success: false, error: "Non authentifié" };
+  // L'auteur d'une réponse est toujours celui du cookie, jamais un
+  // identifiant transmis par le client.
+  const participant = await lireParticipant();
+  if (!participant) {
+    return { success: false, error: 'Session introuvable — reconnectez-vous via /rejoindre' };
   }
 
-  // Fetch the user's section
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('section_id')
-    .eq('id', user.id)
-    .single();
-
-  if (!profile || !profile.section_id) {
-    return { success: false, error: "L'utilisateur n'est associé à aucune section" };
-  }
-
-  const { error } = await supabase
-    .from('reponses')
-    .upsert(
-      {
-        question_id: questionId,
-        profile_id: user.id,
-        section_id: profile.section_id,
-        valeur,
-        commentaire,
-      },
-      {
-        onConflict: 'question_id,profile_id',
-      }
-    );
+  const supabase = createAdminClient();
+  const { error } = await supabase.from('reponses').upsert(
+    {
+      question_id: questionId,
+      participant_id: participant.id,
+      section_id: participant.sectionId,
+      valeur,
+      commentaire,
+    },
+    {
+      onConflict: 'question_id,participant_id',
+    }
+  );
 
   if (error) {
-    console.error('Error saving response:', error);
+    console.error('Erreur en enregistrant la réponse :', error);
     return { success: false, error: error.message };
   }
 
@@ -71,29 +58,26 @@ export async function saveResponse(
 }
 
 export async function getUserResponsesForArticle(articleId: number) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const participant = await lireParticipant();
+  if (!participant) return [];
 
-  if (!user) return [];
-
-  // Fetch user responses for questions associated with the article
+  const supabase = createAdminClient();
   const { data, error } = await supabase
     .from('reponses')
-    .select(`
+    .select(
+      `
       *,
       question:questions(*)
-    `)
-    .eq('profile_id', user.id)
+    `
+    )
+    .eq('participant_id', participant.id)
     .eq('questions.article_id', articleId);
 
   if (error) {
-    console.error('Error fetching user responses:', error);
+    console.error('Erreur en récupérant les réponses du participant :', error);
     return [];
   }
 
-  // Filter out where question was null because of the join filter
   return (data || []).filter((r: any) => r.question !== null) as unknown as Reponse[];
 }
 
@@ -107,18 +91,15 @@ export async function saveProposition(
     return { success: false, error: result.error.errors[0].message };
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return { success: false, error: "Non authentifié" };
+  const participant = await lireParticipant();
+  if (!participant) {
+    return { success: false, error: 'Session introuvable — reconnectez-vous via /rejoindre' };
   }
 
+  const supabase = createAdminClient();
   const { error } = await supabase.from('propositions').insert({
     article_id: articleId,
-    auteur_id: user.id,
+    participant_id: participant.id,
     texte_propose: textePropose,
     expose_motifs: exposeMotifs,
     statut: 'soumise' as PropositionStatut,
@@ -126,7 +107,7 @@ export async function saveProposition(
   });
 
   if (error) {
-    console.error('Error saving proposition:', error);
+    console.error('Erreur en enregistrant la proposition :', error);
     return { success: false, error: error.message };
   }
 
@@ -136,21 +117,18 @@ export async function saveProposition(
 }
 
 export async function getUserPropositionsForArticle(articleId: number) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const participant = await lireParticipant();
+  if (!participant) return [];
 
-  if (!user) return [];
-
+  const supabase = createAdminClient();
   const { data, error } = await supabase
     .from('propositions')
     .select('*')
     .eq('article_id', articleId)
-    .eq('auteur_id', user.id);
+    .eq('participant_id', participant.id);
 
   if (error) {
-    console.error('Error fetching propositions:', error);
+    console.error('Erreur en récupérant les propositions :', error);
     return [];
   }
 

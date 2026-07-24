@@ -2,18 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
-import { Article, Question, Reponse } from '@/lib/types';
-import { Loader2, Radio, Check, Circle } from 'lucide-react';
+import { Article, Question } from '@/lib/types';
+import { calculerDoubleDecompte, Tally } from '@/lib/utils/tally';
+import { Loader2, Radio } from 'lucide-react';
+
+const TALLY_VIDE: Tally = { A: 0, B: 0, abstention: 0, total: 0 };
 
 export default function ProjectionPage() {
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
   const [question, setQuestion] = useState<Question | null>(null);
-  const [votes, setVotes] = useState<{ A: number; B: number; abstention: number; total: number }>({
-    A: 0,
-    B: 0,
-    abstention: 0,
-    total: 0,
-  });
+  // Décompte qui fait foi juridiquement (art. 39 des statuts) : seules les
+  // sections à jour de leur cotisation. Le total tous suffrages confondus
+  // reste affiché à titre indicatif, sans valeur décisionnelle.
+  const [votesSectionsAJour, setVotesSectionsAJour] = useState<Tally>(TALLY_VIDE);
+  const [votesTotal, setVotesTotal] = useState<Tally>(TALLY_VIDE);
   const [loading, setLoading] = useState(true);
 
   const supabase = createClient();
@@ -32,12 +34,14 @@ export default function ProjectionPage() {
       // Fetch article, including text, enjeux, questions
       const { data: article } = await supabase
         .from('articles')
-        .select(`
+        .select(
+          `
           *,
           texte:textes(*),
           enjeux(*),
           questions(*)
-        `)
+        `
+        )
         .eq('id', session.article_actif_id)
         .single();
 
@@ -49,39 +53,24 @@ export default function ProjectionPage() {
       setQuestion(q || null);
 
       if (q) {
-        // Fetch votes for this question
-        const { data: responses } = await supabase
-          .from('reponses')
-          .select('valeur')
-          .eq('question_id', q.id);
+        const [{ data: responses }, { data: sections }] = await Promise.all([
+          supabase.from('reponses').select('valeur, section_id').eq('question_id', q.id),
+          supabase.from('sections').select('id, a_jour_cotisation'),
+        ]);
 
-        calculateVotes(responses || []);
+        calculateVotes(responses || [], sections || []);
       }
     } catch (e) {
-      console.error('Error fetching projection state:', e);
+      console.error('Erreur en récupérant l’état du séminaire pour la projection :', e);
     } finally {
       setLoading(false);
     }
   };
 
-  const calculateVotes = (responses: any[]) => {
-    let A = 0;
-    let B = 0;
-    let abstention = 0;
-
-    responses.forEach((r) => {
-      const rep = r.valeur?.reponse;
-      if (rep === 'A') A++;
-      else if (rep === 'B') B++;
-      else if (rep === 'abstention') abstention++;
-    });
-
-    setVotes({
-      A,
-      B,
-      abstention,
-      total: A + B + abstention,
-    });
+  const calculateVotes = (responses: any[], sections: { id: number; a_jour_cotisation: boolean }[]) => {
+    const { sectionsAJour, total } = calculerDoubleDecompte(responses, sections);
+    setVotesSectionsAJour(sectionsAJour);
+    setVotesTotal(total);
   };
 
   useEffect(() => {
@@ -135,10 +124,12 @@ export default function ProjectionPage() {
     );
   }
 
-  // Calculate percentages
-  const pctA = votes.total > 0 ? Math.round((votes.A / votes.total) * 100) : 0;
-  const pctB = votes.total > 0 ? Math.round((votes.B / votes.total) * 100) : 0;
-  const pctAbs = votes.total > 0 ? Math.round((votes.abstention / votes.total) * 100) : 0;
+  // Le décompte "sections à jour" fait foi (art. 39 des statuts) : c'est
+  // celui utilisé pour les pourcentages affichés en grand.
+  const { A: nbA, B: nbB, abstention: nbAbs, total: totalAJour } = votesSectionsAJour;
+  const pctA = totalAJour > 0 ? Math.round((nbA / totalAJour) * 100) : 0;
+  const pctB = totalAJour > 0 ? Math.round((nbB / totalAJour) * 100) : 0;
+  const pctAbs = totalAJour > 0 ? Math.round((nbAbs / totalAJour) * 100) : 0;
 
   return (
     <div className="min-h-screen bg-slate-950 text-white p-8 flex flex-col justify-between font-sans">
@@ -206,7 +197,7 @@ export default function ProjectionPage() {
             <div className="mt-8 space-y-3">
               <div className="flex justify-between items-end">
                 <span className="text-2xl font-black text-[#E8730C]">{pctA}%</span>
-                <span className="text-[10px] text-slate-400 font-semibold">{votes.A} voix</span>
+                <span className="text-[10px] text-slate-400 font-semibold">{nbA} voix</span>
               </div>
               <div className="w-full h-4 bg-slate-850 rounded-full overflow-hidden">
                 <div
@@ -235,7 +226,7 @@ export default function ProjectionPage() {
             <div className="mt-8 space-y-3">
               <div className="flex justify-between items-end">
                 <span className="text-2xl font-black text-[#128A3E]">{pctB}%</span>
-                <span className="text-[10px] text-slate-400 font-semibold">{votes.B} voix</span>
+                <span className="text-[10px] text-slate-400 font-semibold">{nbB} voix</span>
               </div>
               <div className="w-full h-4 bg-slate-850 rounded-full overflow-hidden">
                 <div
@@ -256,13 +247,23 @@ export default function ProjectionPage() {
       <div
         role="status"
         aria-live="polite"
-        className="mt-8 border-t border-slate-800 pt-6 flex justify-between items-center text-[10px] text-slate-500 font-bold uppercase tracking-wider"
+        className="mt-8 border-t border-slate-800 pt-6 flex flex-col space-y-2 text-[10px] text-slate-500 font-bold uppercase tracking-wider"
       >
-        <div className="flex space-x-6">
-          <span>Total Votants : <span className="text-white">{votes.total}</span></span>
-          <span>Abstentions : <span className="text-white">{votes.abstention} ({pctAbs}%)</span></span>
+        <div className="flex justify-between items-center">
+          <div className="flex space-x-6">
+            <span>
+              Suffrages (sections à jour) : <span className="text-white">{totalAJour}</span>
+            </span>
+            <span>
+              Abstentions : <span className="text-white">{nbAbs} ({pctAbs}%)</span>
+            </span>
+          </div>
+          <span>AMAC Gouvernance 2.0 • Session plénière</span>
         </div>
-        <span>AMAC Gouvernance 2.0 • Session plénière</span>
+        <div className="text-slate-600 normal-case font-medium tracking-normal">
+          Total tous suffrages exprimés (indicatif, y compris sections non à jour de cotisation) :{' '}
+          {votesTotal.total}
+        </div>
       </div>
     </div>
   );

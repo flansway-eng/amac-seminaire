@@ -1,9 +1,10 @@
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { getArticles } from '@/lib/actions/articles';
 import { TexteCode } from '@/lib/types';
 import { SEVERITIES, ENJEU_TYPES, PROPOSITION_STATUS } from '@/lib/constants/labels';
 import Link from 'next/link';
-import { FileText, Download, Printer, Filter, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
+import { FileText, Download, Printer, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
+import ConcordanceFilterForm from '@/components/concordance-filter-form';
 
 interface SearchParams {
   tab?: string;
@@ -21,7 +22,7 @@ export default async function ConcordancePage({
   const filterGravite = params.gravite || '';
   const filterStatut = params.statut || '';
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
 
   // Query textes table
   const { data: texteData } = await supabase
@@ -44,7 +45,7 @@ export default async function ConcordancePage({
     .select(`
       *,
       enjeux(*),
-      propositions(*, profile:profiles(*)),
+      propositions(*, participant:participants(*)),
       decisions(*, proposition:propositions(*))
     `)
     .eq('texte_id', texteData.id)
@@ -120,48 +121,11 @@ export default async function ConcordancePage({
       </div>
 
       {/* Filters Form (hidden on print) */}
-      <form method="GET" action="/concordance" className="space-y-3 bg-slate-50 p-4 border border-gray-100 rounded-2xl print:hidden">
-        <input type="hidden" name="tab" value={activeTab} />
-        
-        <div className="grid grid-cols-2 gap-2">
-          {/* Gravity Filter */}
-          <div className="space-y-1">
-            <label className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">
-              Gravité Enjeu
-            </label>
-            <select
-              name="gravite"
-              defaultValue={filterGravite}
-              onChange={(e) => e.currentTarget.form?.submit()}
-              className="w-full bg-white border border-gray-200 p-2 rounded-xl text-[10px] font-bold text-gray-700 focus:outline-none"
-            >
-              <option value="">Tous les enjeux</option>
-              <option value="critique">Critiques 🔴</option>
-              <option value="majeur">Majeurs 🟠</option>
-              <option value="mineur">Mineurs 🟡</option>
-            </select>
-          </div>
-
-          {/* Proposition Status Filter */}
-          <div className="space-y-1">
-            <label className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">
-              Statut Arbitrage
-            </label>
-            <select
-              name="statut"
-              defaultValue={filterStatut}
-              onChange={(e) => e.currentTarget.form?.submit()}
-              className="w-full bg-white border border-gray-200 p-2 rounded-xl text-[10px] font-bold text-gray-700 focus:outline-none"
-            >
-              <option value="">Tous les statuts</option>
-              <option value="soumise">Soumises</option>
-              <option value="pre_arbitree">Pré-arbitrées</option>
-              <option value="adoptee">Adoptées V1.0 ✅</option>
-              <option value="rejetee">Rejetées ❌</option>
-            </select>
-          </div>
-        </div>
-      </form>
+      <ConcordanceFilterForm
+        activeTab={activeTab}
+        initialGravite={filterGravite}
+        initialStatut={filterStatut}
+      />
 
       {/* Document Action Buttons (hidden on print) */}
       <div className="flex space-x-2 print:hidden">
@@ -249,7 +213,7 @@ export default async function ConcordancePage({
                           art.propositions.map((p: any) => (
                             <div key={p.id} className="bg-slate-50 p-2 rounded-lg border border-slate-100">
                               <span className="font-semibold block text-[9px] text-slate-600">
-                                Version {p.version} soumise par {p.profile?.nom || 'Membre'}
+                                Version {p.version} soumise par {p.participant?.nom || 'Membre'}
                               </span>
                               <p className="line-clamp-2 mt-0.5">{p.texte_propose}</p>
                             </div>

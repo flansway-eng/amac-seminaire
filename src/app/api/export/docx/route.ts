@@ -1,16 +1,24 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { lireParticipant } from '@/lib/session';
 import { Document, Packer, Paragraph, Table, TableRow, TableCell, TextRun, HeadingLevel, WidthType, AlignmentType, BorderStyle } from 'docx';
-import { TEXT_CODES, ROLES, PROPOSITION_STATUS } from '@/lib/constants/labels';
+import { TEXT_CODES, PROPOSITION_STATUS } from '@/lib/constants/labels';
 
 export async function GET(request: Request) {
   try {
+    // /api est exempté de la redirection du middleware : cette route doit
+    // donc vérifier elle-même la session participant, comme toute écriture.
+    const participant = await lireParticipant();
+    if (!participant) {
+      return new Response("Session introuvable — reconnectez-vous via /rejoindre", { status: 401 });
+    }
+
     const { searchParams } = new URL(request.url);
     const tab = searchParams.get('tab') || 'STATUTS';
     const gravite = searchParams.get('gravite') || '';
     const statut = searchParams.get('statut') || '';
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     // Query textes table
     const { data: texteData } = await supabase
@@ -29,7 +37,7 @@ export async function GET(request: Request) {
       .select(`
         *,
         enjeux(*),
-        propositions(*, profile:profiles(*, sections(*))),
+        propositions(*, participant:participants(*, sections(*))),
         decisions(*, proposition:propositions(*))
       `)
       .eq('texte_id', texteData.id)
@@ -194,7 +202,7 @@ export async function GET(request: Request) {
                 const propText = adoptedProp
                   ? adoptedProp.texte_propose
                   : (art.propositions && art.propositions.length > 0
-                      ? art.propositions.map((p: any) => `[${p.version} par ${(p.profile as any)?.nom || 'Scribe'}] : ${p.texte_propose}`).join('\n\n')
+                      ? art.propositions.map((p: any) => `[${p.version} par ${(p.participant as any)?.nom || 'Scribe'}] : ${p.texte_propose}`).join('\n\n')
                       : 'Aucune proposition déposée.');
 
                 let decisionStatus = 'En attente';

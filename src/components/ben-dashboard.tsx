@@ -159,7 +159,7 @@ export default function BenDashboard({
                       {prop.article?.numero_affiche} {prop.article?.titre ? `- ${prop.article.titre}` : ''}
                     </span>
                     <p className="text-[9px] text-gray-400 font-semibold mt-0.5">
-                      Par {prop.profile?.nom || 'Délégué'} • Version {prop.version}
+                      Par {prop.participant?.nom || 'Délégué'} • Version {prop.version}
                     </p>
                   </div>
                   <span className="text-[8px] bg-slate-100 px-2 py-0.5 rounded-lg text-slate-500 font-bold uppercase">

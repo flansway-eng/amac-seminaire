@@ -1,9 +1,10 @@
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { lireParticipant } from '@/lib/session';
 import { getArticles } from '@/lib/actions/articles';
-import { getUserResponsesForArticle, getUserPropositionsForArticle } from '@/lib/actions/responses';
+import { getUserResponsesForArticle } from '@/lib/actions/responses';
 import QuestionnaireFlow from '@/components/questionnaire-flow';
 import Link from 'next/link';
-import { CheckCircle2, Circle, ArrowLeft, Users, Trophy, Award } from 'lucide-react';
+import { CheckCircle2, Circle, ArrowLeft, Users } from 'lucide-react';
 import { redirect } from 'next/navigation';
 
 interface SearchParams {
@@ -18,39 +19,25 @@ export default async function MaSectionPage({
   const params = await searchParams;
   const selectedArticleId = params.article ? Number(params.article) : null;
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect('/login');
+  const participant = await lireParticipant();
+  if (!participant) {
+    redirect('/rejoindre?suite=/ma-section');
   }
 
-  // Fetch current profile and section info
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('*, sections(*)')
-    .eq('id', user.id)
-    .single();
+  const supabase = createAdminClient();
 
-  if (!profile || !profile.sections) {
-    return (
-      <div className="p-6 text-center">
-        <p className="text-sm text-red-600 font-medium">
-          Profil utilisateur ou section introuvable. Veuillez contacter l'administrateur.
-        </p>
-      </div>
-    );
+  let sectionName = 'Bureau Exécutif National / Observateur';
+  if (participant.sectionId) {
+    const { data: section } = await supabase
+      .from('sections')
+      .select('nom')
+      .eq('id', participant.sectionId)
+      .maybeSingle();
+    sectionName = section?.nom || sectionName;
   }
-
-  const sectionName = profile.sections.nom;
-  const sectionId = profile.sections.id;
 
   // Fetch all articles containing questions
-  const { data: rawArticlesWithQuestions } = await supabase
-    .from('questions')
-    .select('article_id');
+  const { data: rawArticlesWithQuestions } = await supabase.from('questions').select('article_id');
 
   const articleIdsWithQuestions = Array.from(
     new Set((rawArticlesWithQuestions || []).map((q) => q.article_id))
@@ -58,15 +45,13 @@ export default async function MaSectionPage({
 
   // Fetch all full articles
   const allArticles = await getArticles();
-  const targetArticles = allArticles.filter((art) =>
-    articleIdsWithQuestions.includes(art.id)
-  );
+  const targetArticles = allArticles.filter((art) => articleIdsWithQuestions.includes(art.id));
 
-  // Fetch all responses of the user to calculate completion
+  // Fetch all responses of the participant to calculate completion
   const { data: userResponses } = await supabase
     .from('reponses')
     .select('*')
-    .eq('profile_id', user.id);
+    .eq('participant_id', participant.id);
 
   // Fetch questions for target articles
   const { data: allQuestions } = await supabase
@@ -100,7 +85,7 @@ export default async function MaSectionPage({
     const selectedArticle = articlesMapped.find((a) => a.id === selectedArticleId);
     if (selectedArticle) {
       const initialResponses = await getUserResponsesForArticle(selectedArticleId);
-      
+
       // Define inline server action for complete callback to redirect
       const handleComplete = async () => {
         'use server';
@@ -147,7 +132,7 @@ export default async function MaSectionPage({
       {/* Header section card */}
       <div className="bg-gradient-to-tr from-[#128A3E] to-[#E8730C] rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
         <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-        
+
         <div className="flex items-center space-x-2.5 mb-2">
           <Users className="w-5 h-5 opacity-90" />
           <h2 className="text-base font-bold tracking-tight">Ma Section : {sectionName}</h2>

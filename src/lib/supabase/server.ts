@@ -1,27 +1,13 @@
-import { createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 
+// Client anon simple, sans session à synchroniser : il n'y a plus de
+// Supabase Auth, donc plus de cookies de session à lire/écrire ici.
+// N'accède qu'aux tables en lecture seule (articles, enjeux, questions,
+// sections, textes) et, pour le Realtime, reponses/seminaire_session —
+// voir la migration 20260724000000 pour le détail des policies RLS.
 export async function createClient() {
-  const cookieStore = await cookies();
-
-  return createServerClient(
+  return createSupabaseClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet: any[]) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
-            );
-          } catch {
-            // Ignored when called from Server Components
-          }
-        },
-      },
-    }
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
 }

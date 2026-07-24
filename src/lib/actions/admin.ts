@@ -1,10 +1,24 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { lireParticipant } from '@/lib/session';
 import { Article, Proposition, Decision, PropositionStatut, DecisionVote } from '@/lib/types';
 import { consolidateArticles } from '@/lib/utils/consolidation';
 import { calculerResultatAdoption, TypeMajorite } from '@/lib/utils/majorite';
 import { revalidatePath } from 'next/cache';
+
+const ROLES_PILOTAGE = ['scribe', 'ben', 'admin'];
+
+async function exigerParticipantPilotage() {
+  const participant = await lireParticipant();
+  if (!participant) {
+    return { participant: null, erreur: 'Session introuvable — reconnectez-vous via /rejoindre' };
+  }
+  if (!ROLES_PILOTAGE.includes(participant.role)) {
+    return { participant: null, erreur: 'Réservé au scribe et au BEN' };
+  }
+  return { participant, erreur: null };
+}
 
 export interface SectionStat {
   id: number;
@@ -27,7 +41,7 @@ export interface DashboardSummary {
 
 export async function getScoreboardData(): Promise<SectionStat[]> {
   try {
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     const { data: sections, error: secError } = await supabase
       .from('sections')
@@ -35,16 +49,16 @@ export async function getScoreboardData(): Promise<SectionStat[]> {
       .eq('actif', true);
 
     if (secError || !sections) {
-      console.warn('Error fetching sections for scoreboard:', secError);
+      console.warn('Erreur en récupérant les sections pour le scoreboard :', secError);
       return [];
     }
 
-    const { data: profiles, error: profError } = await supabase
-      .from('profiles')
+    const { data: participants, error: partError } = await supabase
+      .from('participants')
       .select('id, section_id');
 
-    if (profError || !profiles) {
-      console.warn('Error fetching profiles for scoreboard:', profError);
+    if (partError || !participants) {
+      console.warn('Erreur en récupérant les participants pour le scoreboard :', partError);
       return [];
     }
 
@@ -59,42 +73,42 @@ export async function getScoreboardData(): Promise<SectionStat[]> {
       .select('id, section_id, commentaire');
 
     if (respError || !responses) {
-      console.warn('Error fetching responses for scoreboard:', respError);
+      console.warn('Erreur en récupérant les réponses pour le scoreboard :', respError);
       return [];
     }
 
-  const stats: SectionStat[] = sections.map((sec) => {
-    const secMembers = profiles.filter((p) => p.section_id === sec.id);
-    const memberCount = secMembers.length;
+    const stats: SectionStat[] = sections.map((sec) => {
+      const secMembers = participants.filter((p) => p.section_id === sec.id);
+      const memberCount = secMembers.length;
 
-    const expectedResponses = memberCount * totalQuestions;
-    const secResponses = responses.filter((r) => r.section_id === sec.id);
-    const totalResponses = secResponses.length;
+      const expectedResponses = memberCount * totalQuestions;
+      const secResponses = responses.filter((r) => r.section_id === sec.id);
+      const totalResponses = secResponses.length;
 
-    const completionRate = expectedResponses > 0 
-      ? Math.round((totalResponses / expectedResponses) * 100) 
-      : 0;
+      const completionRate = expectedResponses > 0
+        ? Math.round((totalResponses / expectedResponses) * 100)
+        : 0;
 
-    const motivatedResponses = secResponses.filter(
-      (r) => r.commentaire && r.commentaire.trim().length > 5
-    );
-    const motivatedCount = motivatedResponses.length;
+      const motivatedResponses = secResponses.filter(
+        (r) => r.commentaire && r.commentaire.trim().length > 5
+      );
+      const motivatedCount = motivatedResponses.length;
 
-    const qualityScore = totalResponses > 0 
-      ? Math.round((motivatedCount / totalResponses) * 100) 
-      : 0;
+      const qualityScore = totalResponses > 0
+        ? Math.round((motivatedCount / totalResponses) * 100)
+        : 0;
 
-    return {
-      id: sec.id,
-      nom: sec.nom,
-      ville: sec.ville,
-      memberCount,
-      completionRate: Math.min(completionRate, 100),
-      qualityScore,
-      motivatedCount,
-      totalResponses,
-    };
-  });
+      return {
+        id: sec.id,
+        nom: sec.nom,
+        ville: sec.ville,
+        memberCount,
+        completionRate: Math.min(completionRate, 100),
+        qualityScore,
+        motivatedCount,
+        totalResponses,
+      };
+    });
 
     return stats.sort((a, b) => {
       if (b.completionRate !== a.completionRate) {
@@ -102,50 +116,39 @@ export async function getScoreboardData(): Promise<SectionStat[]> {
       }
       return b.qualityScore - a.qualityScore;
     });
-  } catch (err) {
-    console.warn('Failed to fetch scoreboard data, database offline:', err);
+  } catch (err: any) {
+    console.warn('Échec de récupération du scoreboard :', err.message || err);
     return [];
   }
 }
 
 export async function getDashboardSummary(): Promise<DashboardSummary> {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
 
-  // Total articles
   const { count: totalArticles } = await supabase
     .from('articles')
     .select('*', { count: 'exact', head: true });
 
-  // Answered questions
-  const { data: responses } = await supabase
-    .from('reponses')
-    .select('question_id');
-  const uniqueQuestionsAnswered = new Set((responses || []).map(r => r.question_id)).size;
+  const { data: responses } = await supabase.from('reponses').select('question_id');
+  const uniqueQuestionsAnswered = new Set((responses || []).map((r) => r.question_id)).size;
 
-  // Pending propositions
   const { count: pendingPropositions } = await supabase
     .from('propositions')
     .select('*', { count: 'exact', head: true })
     .eq('statut', 'soumise');
 
-  // Decided articles
   const { count: decidedArticles } = await supabase
     .from('decisions')
     .select('*', { count: 'exact', head: true });
 
-  // Articles en souffrance (has enjeux and no propositions)
-  const { data: articlesWithEnjeux } = await supabase
-    .from('enjeux')
-    .select('article_id');
-  
-  const articleIdsWithEnjeux = Array.from(new Set((articlesWithEnjeux || []).map(e => e.article_id)));
-  
-  const { data: propositions } = await supabase
-    .from('propositions')
-    .select('article_id');
+  const { data: articlesWithEnjeux } = await supabase.from('enjeux').select('article_id');
 
-  const articleIdsWithPropositions = new Set((propositions || []).map(p => p.article_id));
-  const articlesEnSouffrance = articleIdsWithEnjeux.filter(id => !articleIdsWithPropositions.has(id)).length;
+  const articleIdsWithEnjeux = Array.from(new Set((articlesWithEnjeux || []).map((e) => e.article_id)));
+
+  const { data: propositions } = await supabase.from('propositions').select('article_id');
+
+  const articleIdsWithPropositions = new Set((propositions || []).map((p) => p.article_id));
+  const articlesEnSouffrance = articleIdsWithEnjeux.filter((id) => !articleIdsWithPropositions.has(id)).length;
 
   return {
     totalArticles: totalArticles || 96,
@@ -157,15 +160,16 @@ export async function getDashboardSummary(): Promise<DashboardSummary> {
 }
 
 export async function preArbitrateProposition(propId: string, statut: PropositionStatut) {
-  const supabase = await createClient();
-  
-  const { error } = await supabase
-    .from('propositions')
-    .update({ statut })
-    .eq('id', propId);
+  const { participant, erreur } = await exigerParticipantPilotage();
+  if (!participant) {
+    return { success: false, error: erreur };
+  }
+
+  const supabase = createAdminClient();
+  const { error } = await supabase.from('propositions').update({ statut }).eq('id', propId);
 
   if (error) {
-    console.error('Error pre-arbitrating:', error);
+    console.error('Erreur de pré-arbitrage :', error);
     return { success: false, error: error.message };
   }
 
@@ -183,7 +187,12 @@ export async function adoptPropositionDirectly(
   quorumAtteint: boolean,
   typeMajorite: TypeMajorite = 'absolue'
 ) {
-  const supabase = await createClient();
+  const { participant, erreur } = await exigerParticipantPilotage();
+  if (!participant) {
+    return { success: false, error: erreur };
+  }
+
+  const supabase = createAdminClient();
 
   const decision = calculerResultatAdoption(
     { votesPour, votesContre, abstentions },
@@ -191,7 +200,6 @@ export async function adoptPropositionDirectly(
     typeMajorite
   );
 
-  // Update proposition status according to the real outcome of the vote
   if (decision !== 'reporte') {
     const { error: propErr } = await supabase
       .from('propositions')
@@ -203,19 +211,17 @@ export async function adoptPropositionDirectly(
     }
   }
 
-  // Create decision record with the real computed outcome
-  const { error: decErr } = await supabase
-    .from('decisions')
-    .insert({
-      article_id: articleId,
-      proposition_id: propId,
-      decision: decision as DecisionVote,
-      votes_pour: votesPour,
-      votes_contre: votesContre,
-      abstentions: abstentions,
-      seance: 'Arbitrage BEN Direct',
-      quorum_atteint: quorumAtteint,
-    });
+  const { error: decErr } = await supabase.from('decisions').insert({
+    article_id: articleId,
+    proposition_id: propId,
+    participant_id: participant.id,
+    decision: decision as DecisionVote,
+    votes_pour: votesPour,
+    votes_contre: votesContre,
+    abstentions: abstentions,
+    seance: 'Arbitrage BEN Direct',
+    quorum_atteint: quorumAtteint,
+  });
 
   if (decErr) {
     return { success: false, error: decErr.message };
@@ -228,33 +234,21 @@ export async function adoptPropositionDirectly(
 }
 
 export async function getConsolidatedCorpus(texteCode: 'STATUTS' | 'RI') {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
 
-  // Get texte ID
-  const { data: texte } = await supabase
-    .from('textes')
-    .select('id')
-    .eq('code', texteCode)
-    .single();
+  const { data: texte } = await supabase.from('textes').select('id').eq('code', texteCode).single();
 
   if (!texte) return [];
 
-  // Fetch articles
   const { data: articles } = await supabase
     .from('articles')
     .select('*')
     .eq('texte_id', texte.id)
     .order('ordre', { ascending: true });
 
-  // Fetch all propositions
-  const { data: propositions } = await supabase
-    .from('propositions')
-    .select('*');
+  const { data: propositions } = await supabase.from('propositions').select('*');
 
-  // Fetch all decisions
-  const { data: decisions } = await supabase
-    .from('decisions')
-    .select('*');
+  const { data: decisions } = await supabase.from('decisions').select('*');
 
   if (!articles) return [];
 
@@ -266,4 +260,3 @@ export async function getConsolidatedCorpus(texteCode: 'STATUTS' | 'RI') {
 
   return consolidated;
 }
-

@@ -1,38 +1,21 @@
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { lireParticipant } from '@/lib/session';
 import { getDashboardSummary, getConsolidatedCorpus } from '@/lib/actions/admin';
 import BenDashboard from '@/components/ben-dashboard';
 import { redirect } from 'next/navigation';
 import { Shield } from 'lucide-react';
-import { getDemoRoleOverride } from '@/lib/utils/demo-role';
 
 export default async function DashboardPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect('/login');
+  const participant = await lireParticipant();
+  if (!participant) {
+    redirect('/rejoindre?suite=/dashboard');
   }
 
-  // Fetch user role to ensure admin authorization
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('role')
-    .eq('id', user.id)
-    .single();
-
-  // La simulation de rôle (démonstration/formation) permet de PRÉVISUALISER
-  // cette page sans changer le rôle réel : les écritures effectuées depuis
-  // cette console restent gouvernées par le rôle réel via les policies RLS,
-  // donc un rôle simulé ne débloque jamais d'action réelle.
-  const demoOverride = await getDemoRoleOverride();
-  const roleEffectif = demoOverride?.role ?? profile?.role;
-
-  if (!roleEffectif || !['admin', 'ben', 'comite_controle'].includes(roleEffectif)) {
-    // If not authorized, redirect to main pages
+  if (!['admin', 'ben', 'scribe'].includes(participant.role)) {
     redirect('/textes');
   }
+
+  const supabase = createAdminClient();
 
   // Fetch summary statistics
   const summary = await getDashboardSummary();
@@ -40,11 +23,13 @@ export default async function DashboardPage() {
   // Fetch pending propositions
   const { data: propositions } = await supabase
     .from('propositions')
-    .select(`
+    .select(
+      `
       *,
       article:articles(*),
-      profile:profiles(*)
-    `)
+      participant:participants(*)
+    `
+    )
     .eq('statut', 'soumise')
     .order('created_at', { ascending: false });
 

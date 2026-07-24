@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Article, Question, Reponse, Proposition } from '@/lib/types';
-import { updateActiveSeminarArticle, submitSeminarVote, adoptSeminarProposition } from '@/lib/actions/votes';
+import { updateActiveSeminarArticle, submitSeminarVote, adoptSeminarProposition, getPropositionsForArticle } from '@/lib/actions/votes';
 import { TypeMajorite } from '@/lib/utils/majorite';
 import { Radio, Loader2, Check, Send, AlertTriangle, Edit, RefreshCw } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -60,15 +60,12 @@ export default function SeminarInterface({
 
       if (article) {
         setActiveArticle(article as unknown as Article);
-        
-        // Fetch propositions for this new article
-        const { data: props } = await supabase
-          .from('propositions')
-          .select('*, profile:profiles(*)')
-          .eq('article_id', articleId);
-        
-        setPropositions((props || []) as unknown as Proposition[]);
-        
+
+        // Fetch propositions for this new article (via Server Action : la
+        // table propositions n'est plus lisible directement par la clé anon)
+        const props = await getPropositionsForArticle(articleId);
+        setPropositions(props as unknown as Proposition[]);
+
         // Find if user already voted
         const q = (article.questions || []).find((q: any) => q.type === 'choix_ab');
         if (q) {
@@ -76,7 +73,7 @@ export default function SeminarInterface({
             .from('reponses')
             .select('valeur')
             .eq('question_id', q.id)
-            .eq('profile_id', userId)
+            .eq('participant_id', userId)
             .maybeSingle();
 
           setUserVote(myResp?.valeur?.reponse || null);
@@ -328,7 +325,7 @@ export default function SeminarInterface({
                     }`}
                   >
                     <span className="font-semibold text-slate-700">
-                      Par {p.profile?.nom || 'Délégué'} ({p.version})
+                      Par {(p as any).participant?.nom || 'Délégué'} ({p.version})
                     </span>
                     <span className="underline text-slate-500 font-bold shrink-0">Charger</span>
                   </button>

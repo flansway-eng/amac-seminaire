@@ -6,13 +6,10 @@ export const TEXT_CODES = {
 };
 
 export const ROLES = {
-  membre: "Membre",
   delegue: "Délégué de section",
-  responsable_section: "Responsable de Section",
-  ben: "Bureau Exécutif National",
-  comite_controle: "Comité de Contrôle",
-  cac: "Commissaire aux Comptes",
+  observateur: "Invité / Observateur",
   scribe: "Scribe",
+  ben: "Bureau Exécutif National",
   admin: "Administrateur",
 };
 
@@ -64,12 +61,3 @@ export const PLACEHOLDER_MARKER = 'Contenu standard de l\'article';
 export function isContenuPlaceholder(contenu: string | null | undefined): boolean {
   return !!contenu && contenu.includes(PLACEHOLDER_MARKER);
 }
-
-export const SECTIONS = {
-  1: "Abidjan Lagunes",
-  2: "Bouaké Vallée",
-  3: "Yamoussoukro Lacs",
-  4: "San-Pédro Nawa",
-  5: "Korhogo Poro",
-  6: "Daloa Haut-Sassandra",
-};

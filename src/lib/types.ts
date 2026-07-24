@@ -1,4 +1,4 @@
-export type UserRole = 'membre' | 'delegue' | 'responsable_section' | 'ben' | 'comite_controle' | 'cac' | 'scribe' | 'admin';
+export type ParticipantRole = 'delegue' | 'observateur' | 'scribe' | 'ben' | 'admin';
 export type TexteCode = 'STATUTS' | 'RI';
 export type EnjeuType = 'contradiction' | 'renvoi_errone' | 'lacune' | 'risque_gouvernance' | 'incoherence_numerotation' | 'modernisation';
 export type EnjeuGravite = 'critique' | 'majeur' | 'mineur';
@@ -10,17 +10,20 @@ export interface Section {
   id: number;
   nom: string;
   ville: string;
+  slug: string;
   responsable: string | null;
   actif: boolean;
   a_jour_cotisation: boolean;
 }
 
-export interface Profile {
+export interface ParticipantRecord {
   id: string;
   nom: string;
-  role: UserRole;
+  role: ParticipantRole;
   section_id: number | null;
-  created_at: string;
+  seance: string | null;
+  cree_le: string;
+  vu_le: string;
 }
 
 export interface Texte {
@@ -72,7 +75,7 @@ export interface Question {
 export interface Reponse {
   id: string;
   question_id: number;
-  profile_id: string;
+  participant_id: string;
   section_id: number;
   valeur: {
     reponse?: string; // e.g. "A" or "B"
@@ -81,19 +84,19 @@ export interface Reponse {
   };
   commentaire: string | null;
   created_at: string;
-  profile?: Profile; // joined
+  participant?: ParticipantRecord; // joined
 }
 
 export interface Proposition {
   id: string;
   article_id: number;
-  auteur_id: string | null;
+  participant_id: string | null;
   texte_propose: string;
   expose_motifs: string;
   statut: PropositionStatut;
   version: string;
   created_at: string;
-  profile?: Profile; // joined
+  participant?: ParticipantRecord; // joined
   article?: Article; // joined
 }
 
@@ -101,6 +104,7 @@ export interface Decision {
   id: string;
   article_id: number;
   proposition_id: string | null;
+  participant_id: string | null;
   decision: DecisionVote;
   quorum_atteint: boolean;
   votes_pour: number;

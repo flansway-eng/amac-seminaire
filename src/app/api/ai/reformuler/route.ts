@@ -1,7 +1,18 @@
 import { NextResponse } from 'next/server';
+import { lireParticipant } from '@/lib/session';
 
 export async function POST(request: Request) {
   try {
+    // /api est exempté de la redirection du middleware : cette route doit
+    // donc vérifier elle-même la session participant.
+    const participant = await lireParticipant();
+    if (!participant) {
+      return NextResponse.json(
+        { error: 'Session introuvable — reconnectez-vous via /rejoindre' },
+        { status: 401 }
+      );
+    }
+
     const isAiEnabled = process.env.AI_ENABLED === 'true';
     const apiKey = process.env.DEEPSEEK_API_KEY;
 

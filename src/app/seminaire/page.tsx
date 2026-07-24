@@ -1,36 +1,17 @@
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { lireParticipant } from '@/lib/session';
 import { getArticles, getArticleById } from '@/lib/actions/articles';
 import SeminarInterface from '@/components/seminar-interface';
 import { Radio } from 'lucide-react';
 import { redirect } from 'next/navigation';
-import { getDemoRoleOverride } from '@/lib/utils/demo-role';
 
 export default async function SeminairePage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect('/login');
+  const participant = await lireParticipant();
+  if (!participant) {
+    redirect('/rejoindre?suite=/seminaire');
   }
 
-  // Fetch profile
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('role')
-    .eq('id', user.id)
-    .single();
-
-  if (!profile) {
-    redirect('/login');
-  }
-
-  // Simulation de rôle (démonstration/formation) : n'affecte que l'aperçu de
-  // la console scribe côté client — submitSeminarVote / adoptSeminarProposition
-  // s'appuient sur le rôle réel en base via RLS, jamais sur ce cookie.
-  const demoOverride = await getDemoRoleOverride();
-  const roleAffiche = demoOverride?.role ?? profile.role;
+  const supabase = createAdminClient();
 
   // Fetch active seminar session state
   const { data: session } = await supabase
@@ -48,16 +29,14 @@ export default async function SeminairePage() {
     // Fetch propositions for this active article
     const { data: props } = await supabase
       .from('propositions')
-      .select('*, profile:profiles(*)')
+      .select('*, participant:participants(*)')
       .eq('article_id', session.article_actif_id);
-      
+
     propositions = props || [];
   }
 
   // Fetch all articles containing questions
-  const { data: rawArticlesWithQuestions } = await supabase
-    .from('questions')
-    .select('article_id');
+  const { data: rawArticlesWithQuestions } = await supabase.from('questions').select('article_id');
 
   const ids = Array.from(new Set((rawArticlesWithQuestions || []).map((q) => q.article_id)));
   const allArticles = await getArticles();
@@ -77,8 +56,8 @@ export default async function SeminairePage() {
       </div>
 
       <SeminarInterface
-        userRole={roleAffiche}
-        userId={user.id}
+        userRole={participant.role}
+        userId={participant.id}
         initialActiveArticle={activeArticle}
         allQuestionArticles={questionArticles}
         initialPropositions={propositions}
