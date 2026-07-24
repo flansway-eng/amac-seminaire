@@ -31,15 +31,17 @@ function esc(str) {
 }
 
 // Seed Articles (STATUTS: 1 to 49)
+const statutsArticles = statutsData.articles || statutsData;
 sql += `\n-- Articles STATUTS\n`;
-statutsData.forEach((art, idx) => {
+statutsArticles.forEach((art, idx) => {
   const artId = idx + 1; // 1 to 49
   sql += `INSERT INTO articles (id, texte_id, numero, numero_affiche, titre, contenu_actuel, titre_parent, chapitre, ordre) VALUES (${artId}, 1, ${art.numero}, ${esc(art.numero_affiche)}, ${esc(art.titre)}, ${esc(art.contenu_actuel)}, ${esc(art.titre_parent)}, ${esc(art.chapitre)}, ${art.ordre});\n`;
 });
 
 // Seed Articles (RI: 50 to 96)
+const riArticles = riData.articles || riData;
 sql += `\n-- Articles RI\n`;
-riData.forEach((art, idx) => {
+riArticles.forEach((art, idx) => {
   const artId = idx + 50; // 50 to 96
   sql += `INSERT INTO articles (id, texte_id, numero, numero_affiche, titre, contenu_actuel, titre_parent, chapitre, ordre) VALUES (${artId}, 2, ${art.numero}, ${esc(art.numero_affiche)}, ${esc(art.titre)}, ${esc(art.contenu_actuel)}, ${esc(art.titre_parent)}, ${esc(art.chapitre)}, ${art.ordre});\n`;
 });

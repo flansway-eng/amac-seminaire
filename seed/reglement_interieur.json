@@ -1,425 +1,480 @@
-[
-  {
-    "numero": 1,
-    "numero_affiche": "Article 1",
-    "titre": "Article 1",
-    "contenu_actuel": "Contenu standard de l'article 1 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE I - ADHESION - COTISATIONS",
-    "chapitre": null,
-    "ordre": 1
-  },
-  {
-    "numero": 2,
-    "numero_affiche": "Article 2",
-    "titre": "Article 2",
-    "contenu_actuel": "Contenu standard de l'article 2 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE I - ADHESION - COTISATIONS",
-    "chapitre": null,
-    "ordre": 2
-  },
-  {
-    "numero": 3,
-    "numero_affiche": "Article 3",
-    "titre": "Article 3",
-    "contenu_actuel": "Contenu standard de l'article 3 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE I - ADHESION - COTISATIONS",
-    "chapitre": null,
-    "ordre": 3
-  },
-  {
-    "numero": 4,
-    "numero_affiche": "Article 4",
-    "titre": "Article 4",
-    "contenu_actuel": "Contenu standard de l'article 4 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE I - ADHESION - COTISATIONS",
-    "chapitre": null,
-    "ordre": 4
-  },
-  {
-    "numero": 5,
-    "numero_affiche": "Article 5",
-    "titre": "Article 5",
-    "contenu_actuel": "Contenu standard de l'article 5 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 5
-  },
-  {
-    "numero": 6,
-    "numero_affiche": "Article 6",
-    "titre": "Frais de carte de membre",
-    "contenu_actuel": "Les frais d'acquisition de la carte d'adhérent et le montant de la cotisation mensuelle sont fixés par le Bureau Exécutif National et payables d'avance.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 6
-  },
-  {
-    "numero": 7,
-    "numero_affiche": "Article 7",
-    "titre": "Article 7",
-    "contenu_actuel": "Contenu standard de l'article 7 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 7
-  },
-  {
-    "numero": 8,
-    "numero_affiche": "Article 8",
-    "titre": "Article 8",
-    "contenu_actuel": "Contenu standard de l'article 8 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 8
-  },
-  {
-    "numero": 9,
-    "numero_affiche": "Article 9",
-    "titre": "Article 9",
-    "contenu_actuel": "Contenu standard de l'article 9 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 9
-  },
-  {
-    "numero": 10,
-    "numero_affiche": "Article 10",
-    "titre": "Article 10",
-    "contenu_actuel": "Contenu standard de l'article 10 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 10
-  },
-  {
-    "numero": 11,
-    "numero_affiche": "Article 11",
-    "titre": "Article 11",
-    "contenu_actuel": "Contenu standard de l'article 11 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 11
-  },
-  {
-    "numero": 12,
-    "numero_affiche": "Article 12",
-    "titre": "Article 12",
-    "contenu_actuel": "Contenu standard de l'article 12 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 12
-  },
-  {
-    "numero": 13,
-    "numero_affiche": "Article 13",
-    "titre": "Article 13",
-    "contenu_actuel": "Contenu standard de l'article 13 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 13
-  },
-  {
-    "numero": 14,
-    "numero_affiche": "Article 14",
-    "titre": "Article 14",
-    "contenu_actuel": "Contenu standard de l'article 14 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 14
-  },
-  {
-    "numero": 15,
-    "numero_affiche": "Article 15",
-    "titre": "Article 15",
-    "contenu_actuel": "Contenu standard de l'article 15 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE II - DISCIPLINE ET SANCTIONS",
-    "chapitre": null,
-    "ordre": 15
-  },
-  {
-    "numero": 16,
-    "numero_affiche": "Article 16",
-    "titre": "Procédure d'exclusion",
-    "contenu_actuel": "En cas d'exclusion d'un membre pour faute grave, la procédure disciplinaire est régie par l'Article 6 ci-dessus, garantissant le droit de parole du membre.",
-    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
-    "chapitre": null,
-    "ordre": 16
-  },
-  {
-    "numero": 17,
-    "numero_affiche": "Article 17",
-    "titre": "Article 17",
-    "contenu_actuel": "Contenu standard de l'article 17 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
-    "chapitre": null,
-    "ordre": 17
-  },
-  {
-    "numero": 18,
-    "numero_affiche": "Article 18",
-    "titre": "Article 18",
-    "contenu_actuel": "Contenu standard de l'article 18 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
-    "chapitre": null,
-    "ordre": 18
-  },
-  {
-    "numero": 19,
-    "numero_affiche": "Article 19",
-    "titre": "Article 19",
-    "contenu_actuel": "Contenu standard de l'article 19 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
-    "chapitre": null,
-    "ordre": 19
-  },
-  {
-    "numero": 20,
-    "numero_affiche": "Article 20",
-    "titre": "Scrutins et vote des fondateurs",
-    "contenu_actuel": "Les membres fondateurs ne disposent pas de droit de vote lors des scrutins de l'assemblée, en conformité avec les statuts.",
-    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
-    "chapitre": null,
-    "ordre": 20
-  },
-  {
-    "numero": 21,
-    "numero_affiche": "Article 21",
-    "titre": "Article 21",
-    "contenu_actuel": "Contenu standard de l'article 21 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
-    "chapitre": null,
-    "ordre": 21
-  },
-  {
-    "numero": 22,
-    "numero_affiche": "Article 22",
-    "titre": "Article 22",
-    "contenu_actuel": "Contenu standard de l'article 22 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
-    "chapitre": null,
-    "ordre": 22
-  },
-  {
-    "numero": 23,
-    "numero_affiche": "Article 23",
-    "titre": "Article 23",
-    "contenu_actuel": "Contenu standard de l'article 23 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE III - DROITS AND DEVOIRS DES MEMBRES",
-    "chapitre": null,
-    "ordre": 23
-  },
-  {
-    "numero": 24,
-    "numero_affiche": "Article 24",
-    "titre": "Délégation de vote",
-    "contenu_actuel": "Le vote par procuration est restreint aux membres fondateurs empêchés lors de la réunion de l'assemblée générale.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
-    "ordre": 24
-  },
-  {
-    "numero": 25,
-    "numero_affiche": "Article 25",
-    "titre": "Composition du Comité de Contrôle",
-    "contenu_actuel": "Le Comité de Contrôle est composé exclusivement de membres fondateurs, afin de garantir l'indépendance de leur mission d'audit.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
-    "ordre": 25
-  },
-  {
-    "numero": 26,
-    "numero_affiche": "Article 26",
-    "titre": "Article 26",
-    "contenu_actuel": "Contenu standard de l'article 26 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
-    "ordre": 26
-  },
-  {
-    "numero": 27,
-    "numero_affiche": "Article 27",
-    "titre": "Article 27",
-    "contenu_actuel": "Contenu standard de l'article 27 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
-    "ordre": 27
-  },
-  {
-    "numero": 28,
-    "numero_affiche": "Article 28",
-    "titre": "Article 28",
-    "contenu_actuel": "Contenu standard de l'article 28 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
-    "ordre": 28
-  },
-  {
-    "numero": 29,
-    "numero_affiche": "Article 29",
-    "titre": "Article 29",
-    "contenu_actuel": "Contenu standard de l'article 29 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
-    "ordre": 29
-  },
-  {
-    "numero": 30,
-    "numero_affiche": "Article 30",
-    "titre": "Intérim de la Présidence",
-    "contenu_actuel": "En cas d'empêchement temporaire du Président, le Vice-Président assure l'intérim de la présidence du Bureau Exécutif comme prévu à l'article 26 des statuts.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE I - LE BUREAU EXECUTIF",
-    "ordre": 30
-  },
-  {
-    "numero": 31,
-    "numero_affiche": "Article 31",
-    "titre": "Article 31",
-    "contenu_actuel": "Contenu standard de l'article 31 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE II - LE COMITE DE CONTROLE",
-    "ordre": 31
-  },
-  {
-    "numero": 32,
-    "numero_affiche": "Article 32",
-    "titre": "Article 32",
-    "contenu_actuel": "Contenu standard de l'article 32 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE II - LE COMITE DE CONTROLE",
-    "ordre": 32
-  },
-  {
-    "numero": 33,
-    "numero_affiche": "Article 33",
-    "titre": "Article 33",
-    "contenu_actuel": "Contenu standard de l'article 33 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE II - LE COMITE DE CONTROLE",
-    "ordre": 33
-  },
-  {
-    "numero": 34,
-    "numero_affiche": "Article 34",
-    "titre": "Article 34",
-    "contenu_actuel": "Contenu standard de l'article 34 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE IV - FONCTIONNEMENT DES ORGANES",
-    "chapitre": "CHAPITRE II - LE COMITE DE CONTROLE",
-    "ordre": 34
-  },
-  {
-    "numero": 35,
-    "numero_affiche": "Article 35",
-    "titre": "Article 35",
-    "contenu_actuel": "Contenu standard de l'article 35 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE V - DE LA SECTION LOCALE",
-    "chapitre": null,
-    "ordre": 35
-  },
-  {
-    "numero": 36,
-    "numero_affiche": "Article 36",
-    "titre": "Article 36",
-    "contenu_actuel": "Contenu standard de l'article 36 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE V - DE LA SECTION LOCALE",
-    "chapitre": null,
-    "ordre": 36
-  },
-  {
-    "numero": 37,
-    "numero_affiche": "Article 37",
-    "titre": "Article 37",
-    "contenu_actuel": "Contenu standard de l'article 37 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE V - DE LA SECTION LOCALE",
-    "chapitre": null,
-    "ordre": 37
-  },
-  {
-    "numero": 38,
-    "numero_affiche": "Article 38",
-    "titre": "Article 38",
-    "contenu_actuel": "Contenu standard de l'article 38 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE V - DE LA SECTION LOCALE",
-    "chapitre": null,
-    "ordre": 38
-  },
-  {
-    "numero": 39,
-    "numero_affiche": "Article 39",
-    "titre": "Article 39",
-    "contenu_actuel": "Contenu standard de l'article 39 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE V - DE LA SECTION LOCALE",
-    "chapitre": null,
-    "ordre": 39
-  },
-  {
-    "numero": 40,
-    "numero_affiche": "Article 40",
-    "titre": "Article 40",
-    "contenu_actuel": "Contenu standard de l'article 40 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE V - DISPOSITIONS FINANCIERES",
-    "chapitre": null,
-    "ordre": 40
-  },
-  {
-    "numero": 41,
-    "numero_affiche": "Article 41",
-    "titre": "Article 41",
-    "contenu_actuel": "Contenu standard de l'article 41 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE V - DISPOSITIONS FINANCIERES",
-    "chapitre": null,
-    "ordre": 41
-  },
-  {
-    "numero": 42,
-    "numero_affiche": "Article 42",
-    "titre": "Article 42",
-    "contenu_actuel": "Contenu standard de l'article 42 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE V - DISPOSITIONS FINANCIERES",
-    "chapitre": null,
-    "ordre": 42
-  },
-  {
-    "numero": 43,
-    "numero_affiche": "Article 43",
-    "titre": "Article 43",
-    "contenu_actuel": "Contenu standard de l'article 43 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE V - DISPOSITIONS FINANCIERES",
-    "chapitre": null,
-    "ordre": 43
-  },
-  {
-    "numero": 44,
-    "numero_affiche": "Article 44",
-    "titre": "Révision du Règlement Intérieur",
-    "contenu_actuel": "Les modifications du règlement intérieur sont adoptées conformément à l'article 20 des statuts de l'association.",
-    "titre_parent": "TITRE VII - DISPOSITIONS FINALES",
-    "chapitre": null,
-    "ordre": 44
-  },
-  {
-    "numero": 45,
-    "numero_affiche": "Article 45",
-    "titre": "Article 45",
-    "contenu_actuel": "Contenu standard de l'article 45 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE VII - DISPOSITIONS FINALES",
-    "chapitre": null,
-    "ordre": 45
-  },
-  {
-    "numero": 46,
-    "numero_affiche": "Article 46",
-    "titre": "Article 46",
-    "contenu_actuel": "Contenu standard de l'article 46 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE VII - DISPOSITIONS FINALES",
-    "chapitre": null,
-    "ordre": 46
-  },
-  {
-    "numero": 47,
-    "numero_affiche": "Article 47",
-    "titre": "Article 47",
-    "contenu_actuel": "Contenu standard de l'article 47 du règlement intérieur de l'AMAC. Cet article précise les modalités d'application des statuts pour assurer le bon fonctionnement de l'association au quotidien.",
-    "titre_parent": "TITRE VII - DISPOSITIONS FINALES",
-    "chapitre": null,
-    "ordre": 47
-  }
-]
+{
+  "code": "RI",
+  "titre": "Règlement Intérieur de l'AMAC",
+  "date_adoption": "2013-12-24",
+  "lieu_adoption": "Abidjan",
+  "source": "Document original scanné, transcription vérifiée",
+  "nb_articles": 47,
+  "articles": [
+    {
+      "numero": 1,
+      "numero_affiche": "Article 1er",
+      "titre": "Constitution",
+      "titre_parent": "TITRE I : DISPOSITIONS GÉNÉRALES",
+      "chapitre": null,
+      "contenu_actuel": "Le présent Règlement intérieur a pour objet de définir les modalités d'application des statuts de « LES AMIS DE LA MUSIQUE AFRO-CUBAINE » en abrégé L'A.M.A.C.\n\nIl est constitué en Côte d'Ivoire entre les personnes qui adhèrent aux présents statuts et conformément aux dispositions de la loi N° 60-315 du 21/09/1960, une association dénommée « LES AMIS DE LA MUSIQUE AFRO-CUBAINE » en abrégé L'A.M.A.C.",
+      "anomalie_structurelle": null,
+      "ordre": 1
+    },
+    {
+      "numero": 2,
+      "numero_affiche": "Article 2",
+      "titre": "Objet",
+      "titre_parent": "TITRE I : DISPOSITIONS GÉNÉRALES",
+      "chapitre": null,
+      "contenu_actuel": "L'Association est apolitique, laïc et à but non lucratif, elle a pour objet d'œuvrer en vue de :\n1. Rassembler et réunir des hommes et des femmes épris de musique Afro-Cubaine ;\n2. Cultiver l'amitié, le respect, la tolérance et la solidarité entre ses membres ;\n3. Faire connaître et apprécier la musique Afro-Cubaine en Côte d'Ivoire et ailleurs ;\n4. Faire connaître et apprécier la musique ivoirienne à Cuba et ailleurs.",
+      "anomalie_structurelle": null,
+      "ordre": 2
+    },
+    {
+      "numero": 3,
+      "numero_affiche": "Article 3",
+      "titre": "Durée",
+      "titre_parent": "TITRE I : DISPOSITIONS GÉNÉRALES",
+      "chapitre": null,
+      "contenu_actuel": "L'Association est constituée pour une durée illimitée.",
+      "anomalie_structurelle": null,
+      "ordre": 3
+    },
+    {
+      "numero": 4,
+      "numero_affiche": "Article 4",
+      "titre": "Siège Social",
+      "titre_parent": "TITRE I : DISPOSITIONS GÉNÉRALES",
+      "chapitre": null,
+      "contenu_actuel": "Le siège social de l'Association est fixé à Abidjan. Il peut être transféré en cas de besoin en tout lieu du territoire national par simple décision du Bureau Exécutif après consultation obligatoire de l'Assemblée Générale.",
+      "anomalie_structurelle": null,
+      "ordre": 4
+    },
+    {
+      "numero": 5,
+      "numero_affiche": "Article 5",
+      "titre": "Affiliation",
+      "titre_parent": "TITRE I : DISPOSITIONS GÉNÉRALES",
+      "chapitre": null,
+      "contenu_actuel": "L'Association peut s'affilier à des Unions de Club poursuivant des buts similaires dans les conditions prévues par la loi 60-315 du 21/09/1960.",
+      "anomalie_structurelle": null,
+      "ordre": 5
+    },
+    {
+      "numero": 6,
+      "numero_affiche": "Article 6",
+      "titre": "Moyens",
+      "titre_parent": "TITRE I : DISPOSITIONS GÉNÉRALES",
+      "chapitre": null,
+      "contenu_actuel": "Les moyens d'action non exhaustifs de l'Association sont entre autres :\n- Les voyages d'études ;\n- Les manifestations diverses ;\n- L'utilisation des NTIC.",
+      "anomalie_structurelle": null,
+      "ordre": 6
+    },
+    {
+      "numero": 7,
+      "numero_affiche": "Article 7",
+      "titre": "Membres fondateurs",
+      "titre_parent": "TITRE II : ACQUISITION ET PERTE DE LA QUALITÉ DE MEMBRE",
+      "chapitre": "Chapitre 1er : Statuts des membres",
+      "contenu_actuel": "Sont membres fondateurs, les personnes qui :\n- ont participé effectivement à la création de l'Association ;\n- se sont distinguées par des dons, des démarches ou des aides de toute nature pour la mise en place définitive de l'Association.\nLa qualité de membre fondateur est une prérogative, elle ne se transmet pas et se perd par démission ou décès.",
+      "anomalie_structurelle": null,
+      "ordre": 7
+    },
+    {
+      "numero": 8,
+      "numero_affiche": "Article 8",
+      "titre": "Membres Actifs",
+      "titre_parent": "TITRE II : ACQUISITION ET PERTE DE LA QUALITÉ DE MEMBRE",
+      "chapitre": "Chapitre 1er : Statuts des membres",
+      "contenu_actuel": "Sont membres actifs les personnes qui :\n- ont formulé une demande écrite dans ce sens ;\n- ont adhéré aux présents statuts ;\n- se sont acquittés d'une part de leur droit d'adhésion et d'autre part de leurs cotisations annuelles.",
+      "anomalie_structurelle": null,
+      "ordre": 8
+    },
+    {
+      "numero": 9,
+      "numero_affiche": "Article 9",
+      "titre": "Anciens Présidents",
+      "titre_parent": "TITRE II : ACQUISITION ET PERTE DE LA QUALITÉ DE MEMBRE",
+      "chapitre": "Chapitre 1er : Statuts des membres",
+      "contenu_actuel": "L'Ancien président est la personne qui a été une fois président d'un bureau exécutif de L'AMAC.\nLe conseil des Anciens Présidents est composé de tous les anciens présidents du Bureau Exécutif.\nLe conseil des Anciens Présidents est présidé par un Président élu par ses pairs.\nLe conseil des Anciens Présidents a un rôle consultatif et de conseil.\nDes missions ponctuelles peuvent lui être confiées par le Président du Bureau Exécutif.",
+      "anomalie_structurelle": null,
+      "ordre": 9
+    },
+    {
+      "numero": 10,
+      "numero_affiche": "Article 10",
+      "titre": "Membres d'honneur",
+      "titre_parent": "TITRE II : ACQUISITION ET PERTE DE LA QUALITÉ DE MEMBRE",
+      "chapitre": "Chapitre 1er : Statuts des membres",
+      "contenu_actuel": "Sont membres d'honneur les personnes qui ont rendu des services reconnus à L'A.M.A.C ; ils sont agréés par le Bureau Exécutif.",
+      "anomalie_structurelle": null,
+      "ordre": 10
+    },
+    {
+      "numero": 11,
+      "numero_affiche": "Article 11",
+      "titre": "Adhésion",
+      "titre_parent": "TITRE II : ACQUISITION ET PERTE DE LA QUALITÉ DE MEMBRE",
+      "chapitre": "Chapitre 2 : Adhésion et Exclusion des membres actifs",
+      "contenu_actuel": "Peuvent adhérer à la section, toutes les personnes qui jouissent de leurs droits civiques ayant la majorité réglementaire.\nTout membre de l'AMAC ne doit appartenir qu'à une seule section du territoire national. Un membre actif de section peut être désigné comme membre du Bureau Exécutif.",
+      "anomalie_structurelle": null,
+      "ordre": 11
+    },
+    {
+      "numero": 12,
+      "numero_affiche": "Article 12",
+      "titre": "Exclusion",
+      "titre_parent": "TITRE II : ACQUISITION ET PERTE DE LA QUALITÉ DE MEMBRE",
+      "chapitre": "Chapitre 2 : Adhésion et Exclusion des membres actifs",
+      "contenu_actuel": "La qualité de membre se perd par démission, exclusion ou décès.\nLes cas d'exclusion :\n- Membre actif n'appartenant pas au Bureau : l'exclusion est proposée par son Bureau de section et la décision est rendue par le Bureau Exécutif.\n- Membre appartenant au Bureau de section et/ou au Bureau Exécutif : la proposition est faite par le Bureau de section et/ou le Bureau Exécutif et la décision est rendue par l'Assemblée Générale Annuelle de l'exercice en cours.\nTout membre qui fait l'objet d'une exclusion doit déposer sa carte de membre en cours de validité à sa section.",
+      "anomalie_structurelle": null,
+      "ordre": 12
+    },
+    {
+      "numero": 13,
+      "numero_affiche": "Article 13",
+      "titre": "Droits des membres",
+      "titre_parent": "TITRE III : DROITS ET DEVOIRS DES MEMBRES",
+      "chapitre": "Chapitre 1er : Droits et Obligations des membres",
+      "contenu_actuel": "La qualité de membre actif confère les droits suivants :\n- Droit de prendre part aux délibérations de l'assemblée générale ;\n- Droit de vote et d'éligibilité ;\n- Droit de participer aux manifestations officielles ;\n- Droit de bénéficier des avantages accordés aux membres de l'AMAC.\nLa qualité de membre fondateur, de membre du Comité de Contrôle, de past président et de membre d'honneur confère les droits suivants :\n1. En dehors du droit de vote et d'éligibilité, tous les autres droits accordés au membre actif.\n2. Préséance particulière.\n3. Les droits de participation aux manifestations officielles sont laissés à leur appréciation.",
+      "anomalie_structurelle": null,
+      "ordre": 13
+    },
+    {
+      "numero": 14,
+      "numero_affiche": "Article 14",
+      "titre": "Devoirs des membres",
+      "titre_parent": "TITRE III : DROITS ET DEVOIRS DES MEMBRES",
+      "chapitre": "Chapitre 1er : Droits et Obligations des membres",
+      "contenu_actuel": "Le membre actif a le devoir :\n- D'observer la devise et l'idéal de l'Association (voir Art. des statuts de l'A.M.A.C) ;\n- De s'acquitter de ses différentes cotisations ;\n- De participer à toutes les réunions ;\n- De respecter les décisions et les délibérations du Bureau Exécutif, du Bureau de section et de l'Assemblée Générale ;\n- De présenter sa carte de membre chaque fois que cela est nécessaire.",
+      "anomalie_structurelle": "Renvoi incomplet : le numéro d'article de la devise n'est pas indiqué (corrigé à la main en « 2 » sur l'original scanné).",
+      "ordre": 14
+    },
+    {
+      "numero": 15,
+      "numero_affiche": "Article 15",
+      "titre": "Sanction de 1er degré",
+      "titre_parent": "TITRE III : DROITS ET DEVOIRS DES MEMBRES",
+      "chapitre": "Chapitre 2 : Sanctions",
+      "contenu_actuel": "L'inobservation des devoirs déterminés à l'article 14 du présent règlement intérieur donne lieu aux sanctions ci-après :\n- Avertissement\n- Blâme\n- Exclusion\n\nL'avertissement et le blâme sont prononcés par le Bureau Exécutif ou le Bureau de section.",
+      "anomalie_structurelle": null,
+      "ordre": 15
+    },
+    {
+      "numero": 16,
+      "numero_affiche": "Article 16",
+      "titre": "Sanction de 2ème degré",
+      "titre_parent": "TITRE III : DROITS ET DEVOIRS DES MEMBRES",
+      "chapitre": "Chapitre 2 : Sanctions",
+      "contenu_actuel": "L'exclusion est du ressort soit du Bureau Exécutif soit de l'Assemblée Générale (voir Article 6 ci-dessus).",
+      "anomalie_structurelle": "Renvoi erroné : l'article 6 traite des Moyens ; aucun article 6 ne régit l'exclusion.",
+      "ordre": 16
+    },
+    {
+      "numero": 17,
+      "numero_affiche": "Article 17",
+      "titre": "Les ressources du BUREAU EXÉCUTIF",
+      "titre_parent": "TITRE IV : RESSOURCES FINANCIÈRES ET BUDGÉTAIRES",
+      "chapitre": null,
+      "contenu_actuel": "Les ressources du Bureau Exécutif proviennent :\n- De la moitié du droit d'adhésion de chaque membre fixé globalement à 10 000 FCFA (5 000 F CFA pour la Section et 5 000 F CFA pour le Bureau Exécutif) ;\n- Des cotisations annuelles des membres du Bureau Exécutif qui sont fixées à la moitié de leurs cotisations dans leurs sections d'origine ; le rythme du reversement au Bureau Exécutif est la fin de chaque trimestre et cette cotisation annuelle est fixée à 120 000 F CFA/AN soit 10 000 F CFA/MOIS ;\n- Des cotisations exceptionnelles décidées au sein du Bureau Exécutif ;\n- Des dons et legs provenant de personnes physiques et/ou morales.",
+      "anomalie_structurelle": null,
+      "ordre": 17
+    },
+    {
+      "numero": 18,
+      "numero_affiche": "Article 18",
+      "titre": "Année budgétaire",
+      "titre_parent": "TITRE IV : RESSOURCES FINANCIÈRES ET BUDGÉTAIRES",
+      "chapitre": null,
+      "contenu_actuel": "L'année budgétaire de l'Association commence le 1er Janvier et se termine le 31 Décembre de l'année civile en cours.",
+      "anomalie_structurelle": null,
+      "ordre": 18
+    },
+    {
+      "numero": 19,
+      "numero_affiche": "Article 19",
+      "titre": "Dépôt des fonds",
+      "titre_parent": "TITRE IV : RESSOURCES FINANCIÈRES ET BUDGÉTAIRES",
+      "chapitre": null,
+      "contenu_actuel": "BUREAU EXÉCUTIF : Les fonds de l'Association sont déposés (au nom de L'A.M.A.C) par le trésorier général dans un compte en banque ou tout organisme d'épargne agréé par l'État ivoirien.\nAMAC-SECTION : Chaque section doit ouvrir un compte bancaire au nom de L'A.M.A.C-SECTION DE XX dans lequel sont déposés tous les fonds de la section.",
+      "anomalie_structurelle": null,
+      "ordre": 19
+    },
+    {
+      "numero": 20,
+      "numero_affiche": "Article 20",
+      "titre": "Composition",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 1er : L'Assemblée Générale",
+      "contenu_actuel": "L'Assemblée Générale se compose de tous les membres actifs. Les membres fondateurs, les membres d'honneur et les past présidents participent aux sessions de l'Assemblée Générale et y sont entendus.\nLes membres fondateurs, les membres d'honneur et les past présidents ne disposent pas du droit de vote et d'éligibilité.",
+      "anomalie_structurelle": null,
+      "ordre": 20
+    },
+    {
+      "numero": 21,
+      "numero_affiche": "Article 21",
+      "titre": "Attributions",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 1er : L'Assemblée Générale",
+      "contenu_actuel": "L'Assemblée Générale est l'organe suprême de l'Association. Ses principales attributions consistent à :\n- Déterminer la politique générale de l'Association ;\n- Contrôler la politique financière, examiner et approuver le budget et le règlement financier de l'Association entendu que le président de section s'accorde avec le président du Bureau Exécutif ;\n- Fixer les taux des droits d'adhésion et de cotisation ;\n- Créer tout organe subsidiaire nécessaire au bon fonctionnement de l'Association ;\n- Élire le Président et le Commissaire aux Comptes ;\n- Amender les statuts et le règlement intérieur pour les adapter aux réalités du moment ;\n- Nommer éventuellement les liquidateurs de l'Association ;\n- Délocaliser le siège social de l'Association ;\n- Prendre toutes les mesures appropriées à la réalisation des objectifs de l'Association.",
+      "anomalie_structurelle": null,
+      "ordre": 21
+    },
+    {
+      "numero": 22,
+      "numero_affiche": "Article 22",
+      "titre": "Réunions",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 1er : L'Assemblée Générale",
+      "contenu_actuel": "L'Assemblée Générale se réunit en session ordinaire une fois par an sur convocation du Bureau Exécutif.\nL'Assemblée Générale Élective se réunit dans un délai de trois mois tout au plus à la fin du mandat du Président. La convocation pour l'assemblée générale élective est adressée aux sections avec l'ordre du jour et doit leur être indiquée deux mois avant la date prévue.\nL'Assemblée Générale peut se réunir en session extraordinaire sur convocation du Comité de Contrôle.",
+      "anomalie_structurelle": null,
+      "ordre": 22
+    },
+    {
+      "numero": 23,
+      "numero_affiche": "Article 23",
+      "titre": "Quorum",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 1er : L'Assemblée Générale",
+      "contenu_actuel": "La présence des 2/3 des membres à jour de leur cotisation à l'Assemblée Générale est obligatoire pour la validité des délibérations.\nSi ce quorum n'est pas atteint lors de la première convocation, l'Assemblée Générale sera convoquée à 1 mois d'intervalle.\nLors de la deuxième réunion, elle peut valablement délibérer quel que soit le nombre de membres présents.",
+      "anomalie_structurelle": null,
+      "ordre": 23
+    },
+    {
+      "numero": 24,
+      "numero_affiche": "Article 24",
+      "titre": "Vote",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 1er : L'Assemblée Générale",
+      "contenu_actuel": "Chaque membre à jour de ses cotisations dispose d'une voie à l'Assemblée Générale.\nLe vote par procuration ou par correspondance est autorisé uniquement pour les membres fondateurs empêchés.\nLe vote a lieu au scrutin secret. Toutes les décisions de l'Assemblée Générale sont prises à la majorité simple des membres présents et votants.\nL'abstention n'est pas considérée comme un vote.",
+      "anomalie_structurelle": "Contradiction avec l'article 20 : les membres fondateurs ne disposent pas du droit de vote.",
+      "ordre": 24
+    },
+    {
+      "numero": 25,
+      "numero_affiche": "Article 25",
+      "titre": "Composition du Comité de Contrôle",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 2 : Le Comité de Contrôle",
+      "contenu_actuel": "Il est composé d'au plus cinq (5) membres fondateurs ;\nSi le nombre de membres fondateurs existant est inférieur à cinq (5), ceux-ci coopteront l'effectif complémentaire.",
+      "anomalie_structurelle": "Divergence avec l'article 23 des statuts qui indique « principalement des membres fondateurs ».",
+      "ordre": 25
+    },
+    {
+      "numero": 26,
+      "numero_affiche": "Article 26",
+      "titre": "Mission du Comité de Contrôle",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 2 : Le Comité de Contrôle",
+      "contenu_actuel": "- Il est chargé de l'élection du Président du Bureau Exécutif et du Commissaire aux comptes en Assemblée Générale ;\n- Il veille à l'exécution du plan d'activités du Bureau Exécutif et du Commissariat aux comptes ;\n- Il peut être saisi par le Président du Bureau Exécutif ou par le Président de section en cas de besoin.",
+      "anomalie_structurelle": null,
+      "ordre": 26
+    },
+    {
+      "numero": 27,
+      "numero_affiche": "Article 27",
+      "titre": "Mode de fonctionnement du Comité de Contrôle",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 2 : Le Comité de Contrôle",
+      "contenu_actuel": "Le Comité de Contrôle se réunit au moins deux (2) fois dans l'année à l'initiative de son président ou à la demande d'au moins trois (3) de ses membres.\nIl est dirigé par un président élu par ses pairs et assisté d'un rapporteur.",
+      "anomalie_structurelle": null,
+      "ordre": 27
+    },
+    {
+      "numero": 28,
+      "numero_affiche": "Article 28",
+      "titre": "Composition",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 3 : Le Bureau Exécutif",
+      "contenu_actuel": "Le Bureau Exécutif comprend au plus dix (10) membres, tous issus de sections.\nLa fonction de membre du Bureau de section est incompatible avec celle du membre du Bureau Exécutif. Tout membre de bureau de section promu à un poste au Bureau Exécutif doit au préalable rendre sa démission au bureau de section.\nLe Bureau Exécutif doit être constitué au moins de :\n- Un Président\n- Un Vice-Président\n- Un Secrétaire Général\n- Un Trésorier Général\n- Un Délégué aux relations publiques\n- Un Délégué des Affaires Culturelles et de l'organisation\n- Un conseiller",
+      "anomalie_structurelle": null,
+      "ordre": 28
+    },
+    {
+      "numero": 29,
+      "numero_affiche": "Article 29",
+      "titre": "CONDITIONS D'ÉLIGIBILITÉ DU PRÉSIDENT DU BUREAU EXÉCUTIF ET DU COMMISSAIRE AUX COMPTES",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 3 : Le Bureau Exécutif",
+      "contenu_actuel": "- Être âgé d'au moins trente cinq (35) ans révolus au jour du vote ;\n- Jouir de tous ses droits civiques ;\n- Être à jour de ses cotisations statutaires au jour du vote ;\n- N'avoir encouru aucune sanction disciplinaire de l'Association ;\n- Être disponible.",
+      "anomalie_structurelle": null,
+      "ordre": 29
+    },
+    {
+      "numero": 30,
+      "numero_affiche": "Article 30",
+      "titre": "Attributions du Bureau Exécutif",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 3 : Le Bureau Exécutif",
+      "contenu_actuel": "Les attributions des membres du Bureau Exécutif sont les suivantes :\n\nLE PRÉSIDENT\nLe Président est le Chef du Bureau Exécutif dont il nomme tous les autres membres. À ce titre :\n- Il est chargé de la mise en application de son Plan d'Activités tel que validé par l'Assemblée Générale.\n- Il reçoit le programme d'activités de chaque section, et veille à l'exécution du programme harmonisé.\n- Il convoque et préside les A.G et les réunions du Bureau Exécutif. Il veille à l'application des délibérations et des décisions qui y sont prises.\n- Il représente l'Association dans tous les actes de la vie civile et il est investi de tous les pouvoirs à cet effet. Ainsi, il a qualité pour ester en justice au nom de l'Association.\n- Il est le responsable de l'exécution du budget.\n\nLE VICE-PRÉSIDENT\nIl remplace le Président en cas d'empêchement conformément à l'article 26 des statuts.\n\nLE SECRÉTAIRE GÉNÉRAL\nLe Secrétaire Général est le responsable administratif de l'Association. À ce titre :\n- Il rédige les procès-verbaux des délibérations et des décisions des assemblées générales et des réunions du Bureau Exécutif, il en assure la transcription sur le registre prévu à cet effet.\n- Il prépare les réunions du Bureau Exécutif et des assemblées générales.\n- Il rédige toutes les correspondances de l'Association et toutes les convocations.\n- Il assure la garde des archives de L'A.M.A.C.\n\nLE TRÉSORIER GÉNÉRAL\nLe Trésorier Général est le responsable principal de la mobilisation des moyens financiers de l'Association, ainsi il est chargé de :\n- Recouvrer toutes les cotisations des membres du Bureau Exécutif.\n- Veiller au reversement des quotes-parts des droits d'adhésion, des manifestations officielles et cotisations statutaires.\n- Il cosigne les retraits de fonds conjointement avec le président et le secrétaire général (2 signatures sur 3 obligatoires lors de l'opération de retrait mais une seule signature lors des dépôts de fonds sous toutes ses formes).\n- Tenir les livres comptables conformément aux règles de procédure en vigueur.\n\nLE DÉLÉGUÉ AUX AFFAIRES CULTURELLES ET À L'ORGANISATION\nIl est chargé de l'exécution effective des activités culturelles et récréatives, notamment : Soirée, Gala, Réveillon, Conférence, débat, Sorties récréatives, Concert, etc.\n\nLE DÉLÉGUÉ AUX RELATIONS PUBLIQUES\nIl est chargé de la promotion de l'image de L'AMAC. À ce titre il assure les relations avec les médias et les sponsors.",
+      "anomalie_structurelle": "Renvoi erroné : l'article 26 des statuts traite de la composition du Bureau Exécutif, non de la suppléance.",
+      "ordre": 30
+    },
+    {
+      "numero": 31,
+      "numero_affiche": "Article 31",
+      "titre": "MODE OPÉRATOIRE DU SCRUTIN",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 3 : Le Bureau Exécutif",
+      "contenu_actuel": "Tout candidat au poste de président ou de commissaire aux comptes doit déposer, 1 mois à l'avance :\n- Une demande de candidature motivée écrite et son plan sommaire de campagne au Comité de Contrôle.\n- Un cautionnement de (50 000 F CFA pour le candidat à la présidence et 30 000 F CFA pour le candidat au commissariat aux comptes) remboursable si le candidat est élu ou s'il obtient au moins 25% des voix des votants.\n- En dessous du suffrage de 25%, le candidat non élu perd son cautionnement sans aucun recours.",
+      "anomalie_structurelle": null,
+      "ordre": 31
+    },
+    {
+      "numero": 32,
+      "numero_affiche": "Article 32",
+      "titre": "Le déroulement du scrutin",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 3 : Le Bureau Exécutif",
+      "contenu_actuel": "- Un bureau de séance de cinq membres actifs au plus est mis en place séance tenante par le comité de contrôle (les membres présents du Comité de Contrôle) à l'Assemblée Générale.\n- Le vote se fait au bulletin secret.\n- Au premier tour, le candidat qui obtient 51% des suffrages exprimés est élu président ou commissaire aux comptes du Bureau Exécutif.\n- En cas de reprise du vote tout candidat à la majorité relative est déclaré vainqueur.",
+      "anomalie_structurelle": null,
+      "ordre": 32
+    },
+    {
+      "numero": 33,
+      "numero_affiche": "Article 33",
+      "titre": "La composition du nouveau Bureau Exécutif",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 3 : Le Bureau Exécutif",
+      "contenu_actuel": "La composition du nouveau Bureau Exécutif est connue 25 jours après le vote de son président.\nAu-delà de cette période de 25 jours le Comité de Contrôle rappellera le Président élu à l'ordre ; au cas où celui-ci ne communique pas son bureau dans les quinze (15) jours suivants soit quarante cinq (45) jours après son élection, le Comité de Contrôle se fera le devoir de mettre en place un nouveau président en assemblée générale extraordinaire à convoquer dans les trente (30) jours qui suivent l'interpellation du président déchu.",
+      "anomalie_structurelle": null,
+      "ordre": 33
+    },
+    {
+      "numero": 34,
+      "numero_affiche": "Article 34",
+      "titre": "La prise de fonction du nouveau Bureau Exécutif",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 3 : Le Bureau Exécutif",
+      "contenu_actuel": "Le nouveau Bureau Exécutif prend officiellement fonction dans les 30 jours qui suivent le vote de son président.",
+      "anomalie_structurelle": null,
+      "ordre": 34
+    },
+    {
+      "numero": 35,
+      "numero_affiche": "Article 35",
+      "titre": "LA SECTION DE L'AMAC",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 4 : DE LA SECTION",
+      "contenu_actuel": "Une section est un démembrement de l'Association dans une ville, une commune ou un quartier.",
+      "anomalie_structurelle": null,
+      "ordre": 35
+    },
+    {
+      "numero": 36,
+      "numero_affiche": "Article 36",
+      "titre": "LA CRÉATION DE LA SECTION DE L'AMAC",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 4 : DE LA SECTION",
+      "contenu_actuel": "Une section peut être créée dans l'aire géographique définie à l'article 14 ci-dessus par au moins 10 personnes, jouissant de leurs droits civiques et qui en font la demande écrite officielle au Bureau Exécutif.\nEn cas d'avis favorable du Bureau Exécutif, un droit d'affiliation à l'AMAC est acquitté auprès du Bureau Exécutif avant le début de toute activité.",
+      "anomalie_structurelle": "Renvoi erroné : l'aire géographique est définie à l'article 35, non à l'article 14.",
+      "ordre": 36
+    },
+    {
+      "numero": 37,
+      "numero_affiche": "Article 37",
+      "titre": "Fonctionnement de la Section",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 4 : DE LA SECTION",
+      "contenu_actuel": "La section créée est sous la tutelle administrative hiérarchique du Bureau Exécutif ;\n- Elle est régie exclusivement par les Statuts et Règlement Intérieur de l'Association. Elle jouit de l'autonomie financière.\n- Elle a le devoir de verser, chaque année civile, au Bureau Exécutif pour le financement de son fonctionnement, la somme forfaitaire de 40 000 F CFA (quarante mille).\n- Elle a le devoir de reverser au Bureau Exécutif 20% du résultat net positif de chaque manifestation officielle à laquelle les autres sections et le BE ont pris part.\n- Elle a le devoir de reverser au Bureau Exécutif la moitié du droit d'adhésion de chacun de ses membres pour la confection de sa carte d'affiliation à la Section.\nLa Section doit établir au début de chaque année civile un Programme Annuel d'Activités (PAA) communiqué au Bureau Exécutif pour être intégré au programme d'activités annuel de L'AMAC.\nLa réalisation de toute activité populaire majeure contenue dans le (PAA) de la section doit être soumise à l'approbation du Bureau Exécutif.\nUn rapport annuel d'activités sera fait à la fin de chaque année, le Bureau Exécutif doit en être destinataire principal pour exercer son droit de tutelle pour l'intégrer à son rapport annuel d'activités.\nToute activité d'une section qui engage les autres sections ou le Bureau Exécutif, doit être soumise à l'approbation du Bureau Exécutif avant sa mise en œuvre.",
+      "anomalie_structurelle": null,
+      "ordre": 37
+    },
+    {
+      "numero": 38,
+      "numero_affiche": "Article 38",
+      "titre": "Élection",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 5 : Le Commissaire aux comptes",
+      "contenu_actuel": "Le Commissaire aux comptes est élu par l'Assemblée Générale dans les mêmes conditions que le Président du Bureau Exécutif.\nIl a la possibilité de s'adjoindre 1 ou 2 commissaires aux comptes suppléants après avis du Comité de Contrôle. Dans ce cas il doit produire une argumentation motivant et surtout nécessitant cette adjonction ;\nEn aucun cas les absences ou les indisponibilités professionnelles du commissaire aux comptes en chef ne sauraient justifier l'adjonction de suppléants.",
+      "anomalie_structurelle": null,
+      "ordre": 38
+    },
+    {
+      "numero": 39,
+      "numero_affiche": "Article 39",
+      "titre": "Attributions",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 5 : Le Commissaire aux comptes",
+      "contenu_actuel": "Le commissaire aux comptes est chargé de :\n- Contrôler la gestion comptable du Bureau Exécutif ;\n- Examiner et donner son avis sur la gestion financière du Bureau Exécutif ;\n- Rendre compte à l'Assemblée Générale par un rapport écrit à la fin de l'exercice annuel et du mandat du Bureau Exécutif sortant.",
+      "anomalie_structurelle": null,
+      "ordre": 39
+    },
+    {
+      "numero": 40,
+      "numero_affiche": "Article 40",
+      "titre": "Composition",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 6 : Le Conseil des Anciens présidents",
+      "contenu_actuel": "Le Conseil des Anciens présidents comprend toutes les personnes qui ont été au moins une fois président du Bureau Exécutif de L'AMAC.\nCes anciens présidents sont organisés en un bureau dirigé par un président élu par ses pairs.",
+      "anomalie_structurelle": null,
+      "ordre": 40
+    },
+    {
+      "numero": 41,
+      "numero_affiche": "Article 41",
+      "titre": "Pouvoirs",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 6 : Le Conseil des Anciens présidents",
+      "contenu_actuel": "Le conseil des Anciens Présidents a un rôle consultatif et de conseil.\nDes missions ponctuelles peuvent lui être confiées par le Président du Bureau Exécutif ou le Comité de Contrôle.",
+      "anomalie_structurelle": null,
+      "ordre": 41
+    },
+    {
+      "numero": 42,
+      "numero_affiche": "Article 42",
+      "titre": "Réunion",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 6 : Le Conseil des Anciens présidents",
+      "contenu_actuel": "Le Conseil des Anciens Présidents se réunit autant de fois que nécessaire à la demande de son président ou d'office à la demande des 2/3 de ses membres.",
+      "anomalie_structurelle": null,
+      "ordre": 42
+    },
+    {
+      "numero": 43,
+      "numero_affiche": "Article 43",
+      "titre": "Composition",
+      "titre_parent": "TITRE V : ADMINISTRATION ET FONCTIONNEMENT",
+      "chapitre": "Chapitre 7 : Le Collectif des Membres d'honneur",
+      "contenu_actuel": "Le Collectif des membres d'honneur comprend toutes les personnes qui ont rendu des services reconnus par le Bureau Exécutif de L'AMAC.\nIls sont agréés par le Bureau Exécutif.",
+      "anomalie_structurelle": null,
+      "ordre": 43
+    },
+    {
+      "numero": 44,
+      "numero_affiche": "Article 44",
+      "titre": "Modifications du Règlement Intérieur et dissolution",
+      "titre_parent": "TITRE V [bis] : DISPOSITIONS RÉGLEMENTAIRES",
+      "chapitre": null,
+      "contenu_actuel": "Les fonctions de chaque membre dans les organes de l'Association ne sont pas rémunérées. Le Bureau Exécutif détermine et est responsable des dépenses de fonctionnement dont il a la charge.\n\nLes modifications des statuts, du Règlement Intérieur et la dissolution de l'Association sont proposées par :\n- Les 2/3 des membres du Bureau Exécutif ou de l'Assemblée Générale.\nElles interviennent dans les conditions fixées par l'article 20 des statuts et du règlement intérieur.",
+      "anomalie_structurelle": "Titre V employé une seconde fois. Renvoi erroné : l'article 20 ne fixe aucune majorité d'adoption.",
+      "ordre": 44
+    },
+    {
+      "numero": 45,
+      "numero_affiche": "Article 45",
+      "titre": "Liquidation",
+      "titre_parent": "TITRE V [bis] : DISPOSITIONS RÉGLEMENTAIRES",
+      "chapitre": null,
+      "contenu_actuel": "En cas de dissolution, l'Assemblée Générale désigne un commissaire chargé de la liquidation de l'Association.\nL'Assemblée Générale décide de l'affectation de l'actif net.",
+      "anomalie_structurelle": null,
+      "ordre": 45
+    },
+    {
+      "numero": 46,
+      "numero_affiche": "Article 46",
+      "titre": "Formalités d'usage",
+      "titre_parent": "TITRE V [bis] : DISPOSITIONS RÉGLEMENTAIRES",
+      "chapitre": null,
+      "contenu_actuel": "Le Président, au nom de l'Association, est chargé d'accomplir les formalités prescrites par la loi 60-315 du 20 septembre 1960 notamment les dispositions des articles 7, 8, 10, 36.",
+      "anomalie_structurelle": "Date incohérente : la loi 60-315 est datée du 21/09/1960 à l'article 1er.",
+      "ordre": 46
+    },
+    {
+      "numero": 47,
+      "numero_affiche": "Article 47",
+      "titre": "Adoption du Règlement Intérieur",
+      "titre_parent": "TITRE V [bis] : DISPOSITIONS RÉGLEMENTAIRES",
+      "chapitre": null,
+      "contenu_actuel": "Le présent règlement intérieur adopté en Assemblée Générale de l'AMAC sera communiqué et diffusé à tous les Organes statutaires de l'association qui en feront une large diffusion à tous leurs membres respectifs.",
+      "anomalie_structurelle": null,
+      "ordre": 47
+    }
+  ]
+}
