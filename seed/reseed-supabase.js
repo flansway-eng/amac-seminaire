@@ -98,16 +98,29 @@ async function reseedWithClient() {
   // 1. Sections
   console.log('\n📥 Insertion des sections...');
   const sections = [
-    { id: 1, nom: 'Abidjan Lagunes', ville: 'Abidjan', responsable: 'M. Koffi Kouadio', actif: true },
-    { id: 2, nom: 'Bouaké Vallée', ville: 'Bouaké', responsable: 'Mme Yao Amenan', actif: true },
-    { id: 3, nom: 'Yamoussoukro Lacs', ville: 'Yamoussoukro', responsable: "M. N'guessan Konan", actif: true },
-    { id: 4, nom: 'San-Pédro Nawa', ville: 'San-Pédro', responsable: 'M. Gnahoré Bailly', actif: true },
-    { id: 5, nom: 'Korhogo Poro', ville: 'Korhogo', responsable: 'M. Silué Sékou', actif: true },
-    { id: 6, nom: 'Daloa Haut-Sassandra', ville: 'Daloa', responsable: 'Mme Traoré Fatoumata', actif: true },
+    { id: 1, nom: 'Cocody', ville: 'Abidjan', responsable: 'M. Koffi Kouadio', actif: true },
+    { id: 2, nom: 'Bingerville', ville: 'Abidjan', responsable: 'Mme Yao Amenan', actif: true },
+    { id: 3, nom: 'Attécoubé', ville: 'Abidjan', responsable: "M. N'guessan Konan", actif: true },
+    { id: 4, nom: 'Yopougon', ville: 'Abidjan', responsable: 'M. Gnahoré Bailly', actif: true },
+    { id: 5, nom: 'Bassam', ville: 'Grand-Bassam', responsable: 'M. Silué Sékou', actif: true },
+    { id: 6, nom: 'Adiaké', ville: 'Adiaké', responsable: 'Mme Traoré Fatoumata', actif: true },
+    { id: 7, nom: 'Bonoua', ville: 'Bonoua', responsable: 'M. Koffi Konan', actif: true },
+    { id: 8, nom: 'Adzopé', ville: 'Adzopé', responsable: "Mme N'guessan Ahou", actif: true },
+    { id: 9, nom: 'Divo', ville: 'Divo', responsable: 'M. Kouadio Jean', actif: true },
+    { id: 10, nom: 'Oumé', ville: 'Oumé', responsable: 'M. Yao Yao', actif: true },
+    { id: 11, nom: 'Dimbokro', ville: 'Dimbokro', responsable: 'Mme Konan Amenan', actif: true },
+    { id: 12, nom: 'Yamoussoukro', ville: 'Yamoussoukro', responsable: "M. Koffi N'guessan", actif: true },
+    { id: 13, nom: 'Korhogo', ville: 'Korhogo', responsable: 'M. Coulibaly Sekou', actif: true },
+    { id: 14, nom: 'Bouaké', ville: 'Bouaké', responsable: 'Mme Kouamé Ahou', actif: true },
+    { id: 15, nom: 'Abengourou', ville: 'Abengourou', responsable: 'M. Tanoh Koffi', actif: true },
+    { id: 16, nom: 'Dabou', ville: 'Dabou', responsable: 'M. Lath Mel', actif: true },
+    { id: 17, nom: 'Abobo', ville: 'Abidjan', responsable: 'Mme Touré Fatou', actif: true },
+    { id: 18, nom: 'Marcory', ville: 'Abidjan', responsable: 'M. Diallo Alpha', actif: true },
+    { id: 19, nom: 'Tiassalé', ville: 'Tiassalé', responsable: 'M. Bamba Moussa', actif: true },
   ];
   const { error: secErr } = await supabase.from('sections').upsert(sections, { onConflict: 'id' });
   if (secErr) console.error('  ❌ sections:', secErr.message);
-  else console.log('  ✓ 6 sections insérées');
+  else console.log('  ✓ 19 sections insérées');
 
   // 2. Textes
   console.log('📥 Insertion des textes...');

@@ -1,14 +1,25 @@
 -- Seed AMAC Gouvernance 2.0
--- ⚠️  Nettoyage complet (ordre : enfants → parents)
-TRUNCATE decisions, propositions, reponses, questions, enjeux, articles, textes, sections CASCADE;
 -- Sections
 INSERT INTO sections (id, nom, ville, responsable, actif) VALUES
-(1, 'Abidjan Lagunes', 'Abidjan', 'M. Koffi Kouadio', true),
-(2, 'Bouaké Vallée', 'Bouaké', 'Mme Yao Amenan', true),
-(3, 'Yamoussoukro Lacs', 'Yamoussoukro', 'M. N''guessan Konan', true),
-(4, 'San-Pédro Nawa', 'San-Pédro', 'M. Gnahoré Bailly', true),
-(5, 'Korhogo Poro', 'Korhogo', 'M. Silué Sékou', true),
-(6, 'Daloa Haut-Sassandra', 'Daloa', 'Mme Traoré Fatoumata', true);
+(1, 'Cocody', 'Abidjan', 'M. Koffi Kouadio', true),
+(2, 'Bingerville', 'Abidjan', 'Mme Yao Amenan', true),
+(3, 'Attécoubé', 'Abidjan', 'M. N''guessan Konan', true),
+(4, 'Yopougon', 'Abidjan', 'M. Gnahoré Bailly', true),
+(5, 'Bassam', 'Grand-Bassam', 'M. Silué Sékou', true),
+(6, 'Adiaké', 'Adiaké', 'Mme Traoré Fatoumata', true),
+(7, 'Bonoua', 'Bonoua', 'M. Koffi Konan', true),
+(8, 'Adzopé', 'Adzopé', 'Mme N''guessan Ahou', true),
+(9, 'Divo', 'Divo', 'M. Kouadio Jean', true),
+(10, 'Oumé', 'Oumé', 'M. Yao Yao', true),
+(11, 'Dimbokro', 'Dimbokro', 'Mme Konan Amenan', true),
+(12, 'Yamoussoukro', 'Yamoussoukro', 'M. Koffi N''guessan', true),
+(13, 'Korhogo', 'Korhogo', 'M. Coulibaly Sekou', true),
+(14, 'Bouaké', 'Bouaké', 'Mme Kouamé Ahou', true),
+(15, 'Abengourou', 'Abengourou', 'M. Tanoh Koffi', true),
+(16, 'Dabou', 'Dabou', 'M. Lath Mel', true),
+(17, 'Abobo', 'Abidjan', 'Mme Touré Fatou', true),
+(18, 'Marcory', 'Abidjan', 'M. Diallo Alpha', true),
+(19, 'Tiassalé', 'Tiassalé', 'M. Bamba Moussa', true);
 
 -- Textes
 INSERT INTO textes (id, code, titre, date_adoption) VALUES
@@ -16,7 +27,7 @@ INSERT INTO textes (id, code, titre, date_adoption) VALUES
 (2, 'RI', 'Règlement Intérieur de l''AMAC - Edition 2013', '2013-12-24');
 
 -- Reset Auto-increments
-SELECT setval('sections_id_seq', 6);
+SELECT setval('sections_id_seq', 19);
 SELECT setval('textes_id_seq', 2);
 
 -- Articles STATUTS
