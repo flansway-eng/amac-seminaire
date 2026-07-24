@@ -1,4 +1,6 @@
 -- Seed AMAC Gouvernance 2.0
+-- ⚠️  Nettoyage complet (ordre : enfants → parents)
+TRUNCATE decisions, propositions, reponses, questions, enjeux, articles, textes, sections CASCADE;
 -- Sections
 INSERT INTO sections (id, nom, ville, responsable, actif) VALUES
 (1, 'Abidjan Lagunes', 'Abidjan', 'M. Koffi Kouadio', true),
