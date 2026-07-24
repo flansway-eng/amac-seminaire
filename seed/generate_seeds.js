@@ -32,7 +32,7 @@ function generateStatuts() {
     // Hardcode critical articles with issues
     if (i === 1) {
       titre = "Constitution";
-      contenu = "Il est constitué entre les adhérents aux présents statuts une association régie par la loi n° 60-315 du 21 septembre 1960 relative aux associations, dénommée Les Amis de la Musique Afro-Cubaine (AMAC).";
+      contenu = "Il est constitué en Côte d'Ivoire entre les personnes qui adhèrent aux présents statuts et conformément aux dispositions de la loi N° 60-315 du 21/09/1960. Une association dénommée « LES AMIS DE LA MUSIQUE AFRO-CUBAINE » En abrégé L'A.M.A.C.";
     } else if (i === 5) {
       titre = "Régime juridique";
       contenu = "L'association est régie par la loi n° 60-315 du 21 septembre 1960 relative aux associations en Côte d'Ivoire.";
